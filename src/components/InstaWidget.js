@@ -37,7 +37,7 @@ export default () => (
             <Img
               key={node.id}
               fixed={node.localFile.childImageSharp.fixed}
-              style={{ margin: '0 5px' }}
+              style={{ margin: '0 5px', width: 120, height: 150 }}
             />
           </a>
         )
@@ -61,7 +61,7 @@ const INSTAGRAM_QUERY = graphql`
           id
           localFile {
             childImageSharp {
-              fixed(width: 120, height: 150) {
+              fixed(width: 240, height: 300) {
                 ...GatsbyImageSharpFixed
               }
             }
