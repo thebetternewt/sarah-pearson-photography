@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { graphql, StaticQuery } from 'gatsby'
 import Img from 'gatsby-image'
+import Carousel from 'nuka-carousel'
 
 import family from '../images/pearson-family.jpg'
 
@@ -13,15 +14,33 @@ const Slider = styled.div`
 
 const HomepageSlider = props => {
   console.log('slider props:', props)
-  const slideImage = props.slides[0].image
+  const slideImages = props.slides.map(({ image }, id) => (
+    <Img
+      key={id}
+      fluid={image.localFile.childImageSharp.fluid}
+      alt={image.alt}
+      style={{ maxWidth: 1600, margin: '0 auto' }}
+    />
+  ))
+
   return (
-    <Slider>
-      <Img
-        fluid={slideImage.localFile.childImageSharp.fluid}
-        alt={slideImage.alt}
-        style={{ width: '100vw' }}
-      />
-    </Slider>
+    <Carousel
+      wrapAround
+      autoplay
+      autoplayInterval={5000}
+      transitionMode="fade"
+      speed={1500}
+      withoutControls
+      swiping
+      pauseOnHover
+      style={{
+        width: '100vw',
+        height: 700,
+        backgroundColor: '#000',
+      }}
+    >
+      {slideImages}
+    </Carousel>
   )
 }
 
