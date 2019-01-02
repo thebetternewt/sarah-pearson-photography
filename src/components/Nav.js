@@ -10,7 +10,7 @@ const Nav = styled.nav`
   ul {
     display: flex;
     padding: 0;
-    margin: 0;
+    margin: 0 auto;
     list-style: none;
     justify-content: center;
     align-items: center;
