@@ -12,10 +12,8 @@ import { GOLD } from '../components/colors'
 import { H3 } from '../components/ui/text'
 
 import msMagazineLogo from '../images/MississippiMagazineLogo.png'
-import watercolor from '../images/blue-watercolor.jpg'
-import ContactForm from '../components/ContactForm'
-import InstaWidget from '../components/InstaWidget'
 import Nav from '../components/Nav'
+import Contact from '../components/Contact'
 
 const WelcomeMessage = styled.div`
   display: flex;
@@ -93,12 +91,6 @@ const LogosRow = styled.div`
     margin: 0 2rem;
     opacity: 0.6;
   }
-`
-
-const ContactSection = styled.section`
-  background-image: url(${watercolor});
-  background-size: cover;
-  padding: 1rem 0;
 `
 
 const IndexPage = props => {
@@ -179,22 +171,7 @@ const IndexPage = props => {
       </Section>
 
       {/* Contact Section */}
-      <ContactSection>
-        <Container>
-          <H3>Contact</H3>
-          <ContactForm />
-          <InstaWidget />
-          <Nav />
-          <footer>
-            <p style={{ textAlign: 'center', margin: '2rem 0 1rem' }}>
-              Copyright 2019 Sarah Pearson Photography
-            </p>
-            <p style={{ textAlign: 'center', margin: '1rem 0' }}>
-              Built by Relate Media & Design
-            </p>
-          </footer>
-        </Container>
-      </ContactSection>
+      <Contact />
     </Layout>
   )
 }

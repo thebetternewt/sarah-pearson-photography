@@ -4,8 +4,6 @@ import { graphql, StaticQuery } from 'gatsby'
 import Img from 'gatsby-image'
 import Carousel from 'nuka-carousel'
 
-import family from '../images/pearson-family.jpg'
-
 const Slider = styled.div`
   overflow: hidden;
   display: flex;

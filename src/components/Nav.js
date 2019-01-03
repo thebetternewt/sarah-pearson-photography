@@ -53,7 +53,9 @@ export default () => (
         <Link to="/portraits">Portraits</Link>
       </li>
       <li style={{ width: 60, flexBasis: 10 }}>
-        <img src={logo} alt="SP" />
+        <Link to="/">
+          <img src={logo} alt="SP" />
+        </Link>
       </li>
       <li>
         <Link to="/clients">For Clients</Link>
