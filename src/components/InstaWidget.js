@@ -14,12 +14,25 @@ const Instawidget = styled.div`
     text-align: right;
     letter-spacing: 0.1em;
   }
+  @media screen and (max-width: 800px) {
+    align-items: center;
+    flex-direction: column-reverse;
+
+    p {
+      margin-bottom: 0.7rem;
+    }
+  }
 `
 
 const InstaLinkContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   width: 100%;
+
+  @media screen and (max-width: 800px) {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 `
 
 export default () => (
@@ -30,12 +43,12 @@ export default () => (
       const images = data.allInstaNode.edges.map(({ node }) => {
         return (
           <a
+            key={node.id}
             href="https://www.instagram.com/sarahpearsonphoto/"
             target="_blank"
             rel="noreferrer noopener"
           >
             <Img
-              key={node.id}
               fixed={node.localFile.childImageSharp.fixed}
               style={{ margin: '0 5px', width: 120, height: 150 }}
             />
@@ -55,7 +68,7 @@ export default () => (
 
 const INSTAGRAM_QUERY = graphql`
   query InstagramQuery {
-    allInstaNode(limit: 7) {
+    allInstaNode(limit: 6) {
       edges {
         node {
           id

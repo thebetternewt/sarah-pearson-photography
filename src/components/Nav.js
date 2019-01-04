@@ -39,6 +39,10 @@ const Nav = styled.nav`
       height: 60px;
     }
   }
+
+  @media screen and (max-width: 800px) {
+    display: none;
+  }
 `
 export default () => (
   <Nav>

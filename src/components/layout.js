@@ -27,6 +27,7 @@ const HeaderTitle = styled.h1`
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.07em;
+  text-align: center;
 
   span {
     display: block;

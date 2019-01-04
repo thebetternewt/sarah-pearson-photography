@@ -54,6 +54,10 @@ const FormSection = styled.div`
   align-items: center;
   justify-content: flex-start;
   height: 100%;
+
+  @media screen and (max-width: 800px) {
+    padding: 0;
+  }
 `
 
 export default () => (

@@ -24,18 +24,35 @@ const PageHeader = styled.div`
     font-size: 7rem;
     margin: 0;
   }
+  @media screen and (max-width: 800px) {
+    h2 {
+      font-size: 5rem;
+    }
+  }
 `
 
 const FeaturedGalleryCardRow = styled.div`
+  padding: 0 1rem;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-column-gap: 2rem;
+
+  @media screen and (max-width: 800px) {
+    grid-template-columns: 1fr;
+  }
 `
 
 const FeaturedGalleryCardWrapper = styled.div`
   padding-top: 100%;
   background-color: #eee;
   position: relative;
+
+  @media screen and (max-width: 800px) {
+    max-width: 400px;
+    height: 400px;
+    padding-top: 0;
+    margin: 1rem auto;
+  }
 `
 const FeaturedGalleryCard = styled.div`
   position: absolute;
@@ -126,8 +143,8 @@ const Weddings = props => {
     .map(({ gallery }) => {
       const { data } = gallery.document[0]
       return (
-        <Link to={gallery.url}>
-          <FeaturedGalleryCardWrapper key={gallery.id}>
+        <Link to={gallery.url} key={gallery.id}>
+          <FeaturedGalleryCardWrapper>
             <FeaturedGalleryCard
               bgImage={data.featured_image.localFile.childImageSharp.fluid.src}
             >
