@@ -3,10 +3,12 @@ import PropTypes from 'prop-types'
 import { StaticQuery, graphql, Link } from 'gatsby'
 import styled from 'styled-components'
 import { GOLD, GRAY } from './colors'
+import { FaBars } from 'react-icons/fa'
 
 import Header from './header'
 import './layout.css'
 import Nav from './Nav'
+import logo from '../images/spp_logo.png'
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -48,13 +50,37 @@ const Navbar = styled.div`
   height: 80px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 20px 2rem;
+  justify-content: space-between;
+  padding: 20px 1rem;
   border-top: 2px solid ${GOLD};
   border-bottom: 2px solid ${GOLD};
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.25);
   background: #fff;
   z-index: 10;
+
+  @media screen and (min-width: 800px) {
+    justify-content: center;
+    padding: 20px 2rem;
+
+    svg {
+      display: none;
+    }
+  }
+`
+
+const Logo = styled(Link)`
+  margin: 0;
+  display: flex;
+  align-items: center;
+
+  img {
+    height: 60px;
+    margin: 0;
+  }
+
+  @media screen and (min-width: 800px) {
+    display: none;
+  }
 `
 
 const Layout = ({ children }) => (
@@ -76,6 +102,10 @@ const Layout = ({ children }) => (
           </HeaderTitle>
         </HeaderWrapper>
         <Navbar>
+          <Logo to="/">
+            <img src={logo} alt="SP" />
+          </Logo>
+          <FaBars size={24} color="#777" />
           <Nav />
         </Navbar>
         {/* <Header siteTitle={data.site.siteMetadata.title} /> */}
