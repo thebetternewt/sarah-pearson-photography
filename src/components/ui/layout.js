@@ -11,6 +11,7 @@ export const Container = styled.div`
   margin: 0 auto;
   padding: 0 1rem;
 `
+
 export const GridRow = styled.div`
   display: grid;
   grid-auto-columns: 1fr;

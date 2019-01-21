@@ -3,34 +3,15 @@ import { Link, graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import styled from 'styled-components'
 
-import Layout from '../components/layout'
-import Contact from '../components/Contact'
-import SEO from '../components/seo'
-import { H2, H3 } from '../components/ui/text'
-import { Section, Container, GridRow } from '../components/ui/layout'
-import { BLUE } from '../components/colors'
-import WeddingExperienceSlider from '../components/WeddingExperienceSlider'
-import Faq from '../components/faq'
-
-const PageHeader = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 500px;
-  color: #fff;
-  overflow: hidden;
-
-  h2 {
-    font-size: 7rem;
-    margin: 0;
-  }
-  @media screen and (max-width: 800px) {
-    h2 {
-      font-size: 5rem;
-    }
-  }
-`
+import Layout from '../../components/layout'
+import Contact from '../../components/Contact'
+import SEO from '../../components/seo'
+import { H2, H3 } from '../../components/ui/text'
+import { Section, Container } from '../../components/ui/layout'
+import { BLUE } from '../../components/colors'
+import WeddingExperienceSlider from '../../components/WeddingExperienceSlider'
+import Faq from '../../components/faq'
+import PageHeader from '../../components/PageHeader'
 
 const FeaturedGalleryCardRow = styled.div`
   padding: 0 1rem;
@@ -142,7 +123,7 @@ const Weddings = props => {
     .map(({ gallery }) => {
       const { data } = gallery.document[0]
       return (
-        <Link to={gallery.url} key={gallery.id}>
+        <Link to={`${data.category}/${gallery.uid}`} key={gallery.id}>
           <FeaturedGalleryCardWrapper>
             <FeaturedGalleryCard
               bgImage={data.featured_image.localFile.childImageSharp.fluid.src}
@@ -245,10 +226,13 @@ export const query = graphql`
         featured_galleries {
           gallery {
             id
+            uid
             url
+            type
             tags
             document {
               data {
+                category
                 title {
                   text
                 }
