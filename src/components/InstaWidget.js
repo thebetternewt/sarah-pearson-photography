@@ -35,6 +35,14 @@ const InstaLinkContainer = styled.div`
   }
 `
 
+const InstantImage = styled(Img)`
+  &:not(:last-of-type) {
+    margin: 0 5px;
+    width: 120px;
+    height: 150px;
+  }
+`
+
 export default () => (
   <StaticQuery query={INSTAGRAM_QUERY}>
     {data => {

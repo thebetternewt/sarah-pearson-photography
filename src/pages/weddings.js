@@ -7,9 +7,10 @@ import Layout from '../components/layout'
 import Contact from '../components/Contact'
 import SEO from '../components/seo'
 import { H2, H3 } from '../components/ui/text'
-import { Section, Container } from '../components/ui/layout'
+import { Section, Container, GridRow } from '../components/ui/layout'
 import { BLUE } from '../components/colors'
 import WeddingExperienceSlider from '../components/WeddingExperienceSlider'
+import Faq from '../components/faq'
 
 const PageHeader = styled.div`
   position: relative;
@@ -68,10 +69,8 @@ const FeaturedGalleryCard = styled.div`
   background-image: ${({ bgImage }) => `url(${bgImage})`};
   background-size: cover;
   box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.25);
+  padding: 1rem;
 
-  /* &:hover {
-    transform: scale(1.05);
-  } */
   &:hover > button {
     opacity: 1;
   }
@@ -157,6 +156,8 @@ const Weddings = props => {
       )
     })
 
+  const { faq } = props.data.prismicWeddingsPage.data
+
   return (
     <Layout>
       <SEO title="Weddings" />
@@ -201,12 +202,14 @@ const Weddings = props => {
         </Container>
       </Section>
 
-      {/* Videography Section */}
+      {/* FAQ Section */}
       <Section bgColor={BLUE}>
         <Container>
           <H3 style={{ color: '#fff' }}>F.A.Q.</H3>
+          <Faq faq={faq} />
         </Container>
       </Section>
+      {/* Videography Section */}
       <Section>
         <Container>
           <h4>Interested in videography?</h4>
@@ -260,6 +263,13 @@ export const query = graphql`
                 }
               }
             }
+          }
+        }
+        faq {
+          question
+          answer {
+            html
+            text
           }
         }
       }

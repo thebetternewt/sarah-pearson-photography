@@ -3,11 +3,13 @@ import styled from 'styled-components'
 import { graphql, StaticQuery } from 'gatsby'
 import Img from 'gatsby-image'
 import Carousel from 'nuka-carousel'
+import { auto } from 'eol'
 
-const Slider = styled.div`
-  overflow: hidden;
-  display: flex;
-  align-items: center;
+const Slider = styled(Carousel)`
+  width: 100%;
+  max-width: 1200px;
+  background-color: #000;
+  margin: 0 auto;
 `
 
 const HomepageSlider = props => {
@@ -17,12 +19,12 @@ const HomepageSlider = props => {
       key={id}
       fluid={image.localFile.childImageSharp.fluid}
       alt={image.alt}
-      style={{ maxWidth: 1600, margin: '0 auto' }}
+      style={{ margin: '0 auto' }}
     />
   ))
 
   return (
-    <Carousel
+    <Slider
       wrapAround
       autoplay
       autoplayInterval={5000}
@@ -31,14 +33,17 @@ const HomepageSlider = props => {
       withoutControls
       swiping
       pauseOnHover
-      style={{
-        width: '100vw',
-        height: 700,
-        backgroundColor: '#000',
-      }}
+      style={
+        {
+          //width: '100vw',
+          //maxHeight: 700,
+          //backgroundColor: '#000',
+          //overflow: 'hidden',
+        }
+      }
     >
       {slideImages}
-    </Carousel>
+    </Slider>
   )
 }
 

@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import { Section, Container, GridRow } from '../components/ui/layout'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
-import Slider from '../components/homepageSlider'
+import Slider from '../components/Slider'
 
 import { GOLD } from '../components/colors'
 import { H3 } from '../components/ui/text'
@@ -14,6 +14,10 @@ import { H3 } from '../components/ui/text'
 import msMagazineLogo from '../images/MississippiMagazineLogo.png'
 import Nav from '../components/Nav'
 import Contact from '../components/Contact'
+
+const SliderSection = styled.div`
+  background-color: #000;
+`
 
 const WelcomeMessage = styled.div`
   display: flex;
@@ -109,7 +113,9 @@ const IndexPage = props => {
   const welcomeMessage = props.data.prismicHomepage.data.welcome_message.html
   return (
     <Layout>
-      <Slider slides={slides} />
+      <SliderSection>
+        <Slider slides={slides} />
+      </SliderSection>
       <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
       {/* Welcome Section */}
       <Section>
@@ -124,7 +130,7 @@ const IndexPage = props => {
                 }}
               />
             </div>
-            <div>
+            <div style={{ padding: '1rem' }}>
               <H3>Welcome</H3>
               <WelcomeMessage
                 dangerouslySetInnerHTML={{ __html: welcomeMessage }}
