@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { StaticQuery, graphql, Link } from 'gatsby'
 import styled from 'styled-components'
@@ -9,6 +9,7 @@ import Header from './header'
 import './layout.css'
 import Nav from './Nav'
 import logo from '../images/spp_logo.png'
+import MobileNav from './MobileNav'
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -83,18 +84,36 @@ const Logo = styled(Link)`
   }
 `
 
-const Layout = ({ children }) => (
-  <StaticQuery
-    query={graphql`
-      query SiteTitleQuery {
-        site {
-          siteMetadata {
-            title
-          }
-        }
-      }
-    `}
-    render={data => (
+const MobileNavToggle = styled.button`
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background: transparent;
+  outline: none;
+
+  @media screen and (min-width: 800px) {
+    display: none;
+  }
+`
+
+class Layout extends Component {
+  state = {
+    showNav: false,
+  }
+
+  toggleNav = () =>
+    this.setState(({ showNav }) => ({
+      showNav: !showNav,
+    }))
+
+  render() {
+    const { children } = this.props
+    const { showNav } = this.state
+
+    return (
       <>
         <HeaderWrapper>
           <HeaderTitle>
@@ -105,24 +124,17 @@ const Layout = ({ children }) => (
           <Logo to="/">
             <img src={logo} alt="SP" />
           </Logo>
-          <FaBars size={24} color="#777" />
+          <MobileNavToggle>
+            <FaBars size={24} color="#777" onClick={this.toggleNav} />
+          </MobileNavToggle>
+          {showNav && <MobileNav close={this.toggleNav} />}
           <Nav />
         </Navbar>
-        {/* <Header siteTitle={data.site.siteMetadata.title} /> */}
-        <div
-        // style={{
-        //  margin: `0 auto`,
-        //  maxWidth: 960,
-        //  padding: `0px 1.0875rem 1.45rem`,
-        //  paddingTop: 0,
-        // }}
-        >
-          {children}
-        </div>
+        <div>{children}</div>
       </>
-    )}
-  />
-)
+    )
+  }
+}
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,

@@ -67,7 +67,7 @@ const CategoryLink = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 2px solid ${({ dark }) => (dark ? '#000' : '#fff')};
+  border: 2px solid #fff;
   height: 3rem;
   width: 200px;
   font-family: 'Lora', Helvetica, Arial, sans-serif;
@@ -78,10 +78,19 @@ const CategoryLink = styled(Link)`
   transition: all 150ms ease-out;
 
   &:hover {
-    background-color: ${({ dark }) => (dark ? '#000' : '#fff')};
-    color: ${({ dark }) => (dark ? '#fff' : '#000')};
-    opacity: 0.85;
+    background-color: #fff;
+    color: #000;
+    opacity: 0.9;
     cursor: pointer;
+  }
+
+  &.dark {
+    border-color: #000;
+
+    &:hover {
+      background-color: #000;
+      color: #fff;
+    }
   }
 `
 
@@ -98,7 +107,6 @@ const LogosRow = styled.div`
 `
 
 const IndexPage = props => {
-  console.log(props)
   const slides =
     props.data.prismicHomepage.data.home_slider.document[0].data.slides
   const familyPortrait =
@@ -113,7 +121,7 @@ const IndexPage = props => {
   const welcomeMessage = props.data.prismicHomepage.data.welcome_message.html
   return (
     <Layout>
-      <SliderSection>
+      <SliderSection bgImage={slides[0].image.localFile.publicURL}>
         <Slider slides={slides} />
       </SliderSection>
       <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
@@ -150,7 +158,7 @@ const IndexPage = props => {
             />
             <CategoryCardContent>
               <CategoryCardTitle>Portraits</CategoryCardTitle>
-              <CategoryLink to="/portraits" dark>
+              <CategoryLink to="/portraits" className="dark">
                 Gallery
               </CategoryLink>
             </CategoryCardContent>
@@ -199,6 +207,7 @@ export const query = graphql`
                   url
                   localFile {
                     id
+                    publicURL
                     childImageSharp {
                       fluid(maxWidth: 2000) {
                         ...GatsbyImageSharpFluid

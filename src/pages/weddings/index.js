@@ -8,6 +8,7 @@ import Contact from '../../components/Contact'
 import SEO from '../../components/seo'
 import { H2, H3 } from '../../components/ui/text'
 import { Section, Container } from '../../components/ui/layout'
+import { Button } from '../../components/ui/buttons'
 import { BLUE } from '../../components/colors'
 import WeddingExperienceSlider from '../../components/WeddingExperienceSlider'
 import Faq from '../../components/faq'
@@ -193,8 +194,18 @@ const Weddings = props => {
       {/* Videography Section */}
       <Section>
         <Container>
-          <h4>Interested in videography?</h4>
-          <button>Let us know!</button>
+          <p
+            style={{
+              fontSize: '2rem',
+              margin: '1rem auto',
+              textAlign: 'center',
+            }}
+          >
+            Interested in videography?
+          </p>
+          <Button className="dark" style={{ margin: '1rem auto' }}>
+            Let us know!
+          </Button>
         </Container>
       </Section>
 
