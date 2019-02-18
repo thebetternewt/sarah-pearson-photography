@@ -60,8 +60,8 @@ module.exports = {
         // To enable preview of drafts, copy .env-example into .env,
         // and add a token with read permissions
         token: process.env.SANITY_TOKEN,
-        watchMode: true,
-        overlayDrafts: true,
+        watchMode: process.env.NODE_ENV === 'development',
+        overlayDrafts: process.env.NODE_ENV === 'development',
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
