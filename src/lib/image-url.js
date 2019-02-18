@@ -1,5 +1,5 @@
 import imageUrlBuilder from '@sanity/image-url'
-import sanityConfig from '../../../sanity-studio/sanity.json'
+import { sanityConfig } from '../../gatsby-config'
 
 const builder = imageUrlBuilder(sanityConfig.api)
 

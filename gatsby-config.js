@@ -2,6 +2,13 @@ require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
+export const sanityConfig = {
+  api: {
+    projectId: process.env.SANITY_PROJECT_ID,
+    dataset: process.env.SANITY_DATASET,
+  },
+}
+
 module.exports = {
   siteMetadata: {
     title: `Sarah Pearson Photography`,
