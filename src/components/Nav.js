@@ -1,8 +1,8 @@
-import React from 'react'
-import styled from 'styled-components'
-import { Link } from 'gatsby'
+import { Link } from 'gatsby';
+import React from 'react';
+import styled from 'styled-components';
+import logo from '../images/spp_logo.png';
 
-import logo from '../images/spp_logo.png'
 
 const Nav = styled.nav`
   width: 100%;
@@ -21,7 +21,7 @@ const Nav = styled.nav`
 
     li {
       margin: 0;
-      /* text-align: center; */
+      font-size: 0.8rem;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -32,11 +32,13 @@ const Nav = styled.nav`
         text-decoration: none;
         color: inherit;
         text-transform: uppercase;
+        display: flex;
+        align-items: center;
       }
     }
 
     img {
-      height: 60px;
+      height: 50px;
     }
   }
 

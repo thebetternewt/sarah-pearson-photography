@@ -1,22 +1,105 @@
+import { graphql, Link } from 'gatsby'
 import React from 'react'
-import { Link } from 'gatsby'
-import Img from 'gatsby-image'
 import styled from 'styled-components'
-
-import { Section, Container, GridRow } from '../components/ui/layout'
+import Footer from '../components/Footer'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
-import Slider from '../components/Slider'
-
-import { GOLD } from '../components/colors'
+import { Button } from '../components/ui/buttons'
+import {
+  Container,
+  GridRow,
+  Section,
+  SimpleBorderDecorator,
+} from '../components/ui/layout'
 import { H3 } from '../components/ui/text'
-
 import msMagazineLogo from '../images/MississippiMagazineLogo.png'
-import Nav from '../components/Nav'
-import Contact from '../components/Contact'
+import { buildImageObj } from '../lib/helpers'
+import { imageUrlFor } from '../lib/image-url'
 
 const SliderSection = styled.div`
-  background-color: #000;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  height: 400px;
+  position: relative;
+  overflow: hidden;
+
+  img {
+    /* max-width: none; */
+    /* height: 100%; */
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  @media screen and (max-width: 800px) {
+    img {
+      max-width: none;
+    }
+  }
+`
+
+const WelcomeSection = styled(Section)`
+  .row {
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 3rem;
+    align-items: center;
+    text-align: center;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    max-width: 960px;
+
+    @media screen and (max-width: 800px) {
+      grid-template-columns: 1fr;
+    }
+
+    img {
+      margin: 0;
+    }
+  }
+
+  .image-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 460px;
+    margin: 0 auto;
+  }
+
+  .mobile-heading {
+    display: none;
+  }
+
+  .greeting {
+    font-family: 'Playfair Display', Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    font-size: 2.4rem;
+    letter-spacing: 0.08em;
+    text-align: center;
+  }
+
+  @media screen and (max-width: 800px) {
+    .image-wrapper {
+      max-width: 90%;
+      margin-bottom: 2rem;
+    }
+
+    .mobile-heading {
+      display: block;
+    }
+
+    .desktop-heading {
+      display: none;
+    }
+
+    button {
+      font-size: 1rem;
+    }
+  }
 `
 
 const WelcomeMessage = styled.div`
@@ -24,9 +107,10 @@ const WelcomeMessage = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%;
   font-family: 'Lora', Helvetica, Arial, sans-serif;
-  padding: 0 1rem;
+
+  margin-bottom: 2rem;
+  text-align: center;
 
   p {
     text-align: center;
@@ -36,10 +120,19 @@ const WelcomeMessage = styled.div`
 const CategoryLinkCard = styled.div`
   display: block;
   position: relative;
-  height: 500px;
+  height: 400px;
   color: ${({ dark }) => (dark ? '#000' : '#fff')};
   background-color: ${({ dark }) => (dark ? '#fff' : '#000')};
   overflow: hidden;
+  text-align: center;
+
+  img {
+    opacity: 0.6;
+    min-height: 100%;
+    min-width: 100%;
+    max-width: none;
+    margin: 0 auto;
+  }
 `
 
 const CategoryCardContent = styled.div`
@@ -106,55 +199,88 @@ const LogosRow = styled.div`
   }
 `
 
-const IndexPage = props => {
-  const slides =
-    props.data.prismicHomepage.data.home_slider.document[0].data.slides
-  const familyPortrait =
-    props.data.prismicHomepage.data.family_portrait.localFile.childImageSharp
-      .fluid
-  const portraitsBgImage =
-    props.data.prismicHomepage.data.portraits_link_background_image.localFile
-      .childImageSharp.fluid
-  const weddingsBgImage =
-    props.data.prismicHomepage.data.weddings_link_background_image.localFile
-      .childImageSharp.fluid
-  const welcomeMessage = props.data.prismicHomepage.data.welcome_message.html
+const IndexPage = ({ data }) => {
+  const page = data.sanityHomepage
+  console.log(page)
+  const { mainImage, welcomeImage, portraitsImage, weddingsImage } = page
+  // const slides =
+  //   props.data.prismicHomepage.data.home_slider.document[0].data.slides
+  // const familyPortrait =
+  //   props.data.prismicHomepage.data.family_portrait.localFile.childImageSharp
+  //     .fluid
+  // const portraitsBgImage =
+  //   props.data.prismicHomepage.data.portraits_link_background_image.localFile
+  //     .childImageSharp.fluid
+  // const weddingsBgImage =
+  //   props.data.prismicHomepage.data.weddings_link_background_image.localFile
+  //     .childImageSharp.fluid
+  // const welcomeMessage = props.data.prismicHomepage.data.welcome_message.html
   return (
     <Layout>
-      <SliderSection bgImage={slides[0].image.localFile.publicURL}>
-        <Slider slides={slides} />
+      <SliderSection>
+        <img
+          src={imageUrlFor(buildImageObj(mainImage))
+            // .width(2000)
+            .height(450)
+            .fit('crop')
+            .url()}
+          alt={mainImage.alt}
+        />
       </SliderSection>
       <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
       {/* Welcome Section */}
-      <Section>
+      <WelcomeSection>
         <Container>
-          <GridRow>
-            <div style={{ padding: '0 15px' }}>
-              <Img
-                fluid={familyPortrait}
-                style={{
-                  border: `2px solid ${GOLD}`,
-                  margin: '0 auto',
-                }}
-              />
+          <div className="mobile-heading">
+            <H3>Welcome</H3>
+            <h4 className="greeting">Meet Sarah</h4>
+            <hr />
+          </div>
+          <div className="row">
+            <div>
+              <div className="image-wrapper">
+                <img
+                  src={imageUrlFor(buildImageObj(welcomeImage))
+                    .width(600)
+                    // .height(450)
+                    .fit('crop')
+                    .url()}
+                  alt={welcomeImage.alt}
+                />
+                <SimpleBorderDecorator yGap={18} xGap={10} />
+                <SimpleBorderDecorator yGap={10} xGap={18} />
+              </div>
             </div>
-            <div style={{ padding: '1rem' }}>
-              <H3>Welcome</H3>
-              <WelcomeMessage
-                dangerouslySetInnerHTML={{ __html: welcomeMessage }}
-              />
+            <div>
+              <div className="desktop-heading">
+                <H3>Welcome</H3>
+                <h4 className="greeting">Meet Sarah</h4>
+                <hr />
+              </div>
+              <WelcomeMessage>
+                {page.welcomeText}
+                <Link to="/sarah" style={{ marginTop: '2rem' }}>
+                  <Button className="color" align="center">
+                    Learn More About Me
+                  </Button>
+                </Link>
+              </WelcomeMessage>
             </div>
-          </GridRow>
+          </div>
         </Container>
-      </Section>
+      </WelcomeSection>
 
       {/* Categories Section */}
       <section>
         <GridRow>
           <CategoryLinkCard dark>
-            <Img
-              fluid={portraitsBgImage}
-              style={{ opacity: 0.6, minHeight: '100%', minWidth: '100%' }}
+            <img
+              src={imageUrlFor(buildImageObj(portraitsImage))
+                .width(1000)
+                .height(400)
+                .fit('crop')
+                .url()}
+              alt={portraitsImage.alt}
             />
             <CategoryCardContent>
               <CategoryCardTitle>Portraits</CategoryCardTitle>
@@ -164,9 +290,13 @@ const IndexPage = props => {
             </CategoryCardContent>
           </CategoryLinkCard>
           <CategoryLinkCard>
-            <Img
-              fluid={weddingsBgImage}
-              style={{ opacity: 0.6, minHeight: '100%', minWidth: '100%' }}
+            <img
+              src={imageUrlFor(buildImageObj(weddingsImage))
+                .width(1000)
+                .height(400)
+                .fit('crop')
+                .url()}
+              alt={weddingsImage.alt}
             />
             <CategoryCardContent>
               <CategoryCardTitle>Weddings</CategoryCardTitle>
@@ -185,7 +315,7 @@ const IndexPage = props => {
       </Section>
 
       {/* Contact Section */}
-      <Contact />
+      <Footer />
     </Layout>
   )
 }
@@ -194,60 +324,92 @@ export default IndexPage
 
 export const query = graphql`
   query HomepageQuery {
-    prismicHomepage {
-      id
-      data {
-        home_slider {
-          id
-          document {
-            data {
-              slides {
-                image {
-                  alt
-                  url
-                  localFile {
-                    id
-                    publicURL
-                    childImageSharp {
-                      fluid(maxWidth: 2000) {
-                        ...GatsbyImageSharpFluid
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
+    sanityHomepage {
+      welcomeText
+      mainImage {
+        crop {
+          _key
+          _type
+          top
+          bottom
+          left
+          right
         }
-        family_portrait {
-          localFile {
-            childImageSharp {
-              fluid(maxWidth: 600) {
-                ...GatsbyImageSharpFluid
-              }
-            }
-          }
+        hotspot {
+          _key
+          _type
+          x
+          y
+          height
+          width
         }
-        welcome_message {
-          html
+        asset {
+          _id
         }
-        portraits_link_background_image {
-          localFile {
-            childImageSharp {
-              fluid(maxWidth: 600) {
-                ...GatsbyImageSharpFluid
-              }
-            }
-          }
+        alt
+      }
+      welcomeImage {
+        crop {
+          _key
+          _type
+          top
+          bottom
+          left
+          right
         }
-        weddings_link_background_image {
-          localFile {
-            childImageSharp {
-              fluid(maxWidth: 600) {
-                ...GatsbyImageSharpFluid
-              }
-            }
-          }
+        hotspot {
+          _key
+          _type
+          x
+          y
+          height
+          width
+        }
+        asset {
+          _id
+        }
+        alt
+      }
+      portraitsImage {
+        crop {
+          _key
+          _type
+          top
+          bottom
+          left
+          right
+        }
+        hotspot {
+          _key
+          _type
+          x
+          y
+          height
+          width
+        }
+        asset {
+          _id
+        }
+      }
+      weddingsImage {
+        crop {
+          _key
+          _type
+          top
+          bottom
+          left
+          right
+        }
+        hotspot {
+          _key
+          _type
+          x
+          y
+          height
+          width
+        }
+        asset {
+          _id
         }
       }
     }

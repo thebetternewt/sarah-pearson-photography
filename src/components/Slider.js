@@ -1,12 +1,17 @@
-import React from 'react'
-import styled from 'styled-components'
-import Carousel from 'nuka-carousel'
+import Carousel from 'nuka-carousel';
+import React from 'react';
+import styled from 'styled-components';
 
 const Slider = styled(Carousel)`
-  width: 100%;
+  height: 450px;
   max-width: 1200px;
   background-color: #000;
   margin: 0 auto;
+  overflow: hidden;
+
+  img {
+    height: 450px;
+  }
 `
 
 const HomepageSlider = props => {

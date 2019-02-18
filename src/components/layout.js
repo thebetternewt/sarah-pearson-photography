@@ -1,15 +1,13 @@
-import React, { Component } from 'react'
+import { Link } from 'gatsby'
 import PropTypes from 'prop-types'
-import { StaticQuery, graphql, Link } from 'gatsby'
-import styled from 'styled-components'
-import { GOLD, GRAY } from './colors'
+import React, { Component } from 'react'
 import { FaBars } from 'react-icons/fa'
-
-import Header from './header'
-import './layout.css'
-import Nav from './Nav'
+import styled from 'styled-components'
 import logo from '../images/spp_logo.png'
+import { GOLD } from './colors'
+import './layout.css'
 import MobileNav from './MobileNav'
+import Nav from './Nav'
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -48,15 +46,16 @@ const Navbar = styled.div`
   position: sticky;
   top: 0;
   width: 100%;
-  height: 80px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 20px 1rem;
-  border-top: 2px solid ${GOLD};
-  border-bottom: 2px solid ${GOLD};
-  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.25);
+  /* border-top: 2px solid ${GOLD};
+  border-bottom: 2px solid ${GOLD}; */
+  box-shadow: 6px 4px 14px rgba(0, 0, 0, 0.25);
   background: #fff;
+  color: #555;
   z-index: 10;
 
   @media screen and (min-width: 800px) {
@@ -75,7 +74,7 @@ const Logo = styled(Link)`
   align-items: center;
 
   img {
-    height: 60px;
+    height: 40px;
     margin: 0;
   }
 
@@ -97,6 +96,11 @@ const MobileNavToggle = styled.button`
   @media screen and (min-width: 800px) {
     display: none;
   }
+`
+
+const ContentWrapper = styled.div`
+  font-family: 'Baskerville', Arial, Helvetica, sans-serif;
+  color: #555;
 `
 
 class Layout extends Component {
@@ -125,12 +129,12 @@ class Layout extends Component {
             <img src={logo} alt="SP" />
           </Logo>
           <MobileNavToggle>
-            <FaBars size={24} color="#777" onClick={this.toggleNav} />
+            <FaBars size={24} color="#555" onClick={this.toggleNav} />
           </MobileNavToggle>
           {showNav && <MobileNav close={this.toggleNav} />}
           <Nav />
         </Navbar>
-        <div>{children}</div>
+        <ContentWrapper>{children}</ContentWrapper>
       </>
     )
   }

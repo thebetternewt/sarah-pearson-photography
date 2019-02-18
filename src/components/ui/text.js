@@ -13,7 +13,8 @@ export const H2 = styled.h2`
 export const H3 = styled.h3`
   font-family: 'Pinyon Script', Helvetica, Arial, sans-serif;
   font-weight: normal;
-  color: ${BLUE};
+  /* color: ${BLUE}; */
+  color: #9fbebc;
   font-size: 3rem;
   text-align: center;
   margin: 0.5em 0 0.2em;

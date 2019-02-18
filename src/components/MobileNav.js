@@ -1,8 +1,7 @@
-import React from 'react'
-import styled from 'styled-components'
 import { Link } from 'gatsby'
+import React from 'react'
 import { FaTimes } from 'react-icons/fa'
-
+import styled from 'styled-components'
 import logo from '../images/spp_logo.png'
 
 const NavContainer = styled.div`
@@ -11,7 +10,7 @@ const NavContainer = styled.div`
   height: 100vh;
   top: 0;
   left: 0;
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: rgba(255, 255, 255, 0.99);
 `
 
 const CloseButton = styled.button`

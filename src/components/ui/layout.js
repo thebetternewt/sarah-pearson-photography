@@ -7,7 +7,7 @@ export const Section = styled.section`
 
 export const Container = styled.div`
   width: 100%;
-  max-width: 1200px;
+  max-width: ${({ maxWidth }) => (maxWidth || 960) + 'px'};
   margin: 0 auto;
   padding: 0 1rem;
 `
@@ -18,8 +18,38 @@ export const GridRow = styled.div`
   grid-template-columns: 1fr 1fr;
   align-items: center;
   margin: 0 auto;
+  max-width: ${({ width }) => `${width}px`};
 
   @media screen and (max-width: 800px) {
     grid-template-columns: 1fr;
   }
+`
+
+export const SimpleBorderDecorator = styled.div`
+  position: absolute;
+  border: 1px solid #ccc;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+
+  ${({ xGap, yGap }) => {
+    let styles = ''
+    if (yGap) {
+      styles += `
+      top: -${yGap}px;
+      height: calc(100% + ${2 * yGap}px);
+      `
+    }
+
+    if (xGap) {
+      styles += `
+      left: -${xGap}px;
+      width: calc(100% + ${2 * xGap}px);
+      `
+    }
+
+    return styles
+  }}
 `
