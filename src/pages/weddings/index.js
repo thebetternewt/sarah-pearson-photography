@@ -1,18 +1,141 @@
+import { graphql, Link } from 'gatsby'
 import React from 'react'
-import { Link, graphql } from 'gatsby'
-import Img from 'gatsby-image'
 import styled from 'styled-components'
-
-import Layout from '../../components/layout'
+import { TEAL } from '../../components/colors'
 import Contact from '../../components/Contact'
-import SEO from '../../components/seo'
-import { H2, H3 } from '../../components/ui/text'
-import { Section, Container } from '../../components/ui/layout'
-import { Button } from '../../components/ui/buttons'
-import { BLUE } from '../../components/colors'
-import WeddingExperienceSlider from '../../components/WeddingExperienceSlider'
 import Faq from '../../components/faq'
+import Layout from '../../components/layout'
 import PageHeader from '../../components/PageHeader'
+import SEO from '../../components/seo'
+import { Button } from '../../components/ui/buttons'
+import {
+  Container,
+  Section,
+  SimpleBorderDecorator,
+} from '../../components/ui/layout'
+import { H3 } from '../../components/ui/text'
+import { buildImageObj } from '../../lib/helpers'
+import { imageUrlFor } from '../../lib/image-url'
+
+const FeaturedGalleriesCollection = styled.div`
+  display: flex;
+
+  .col {
+    flex-basis: 33.3%;
+    margin: 5px;
+    width: 400px;
+    max-width: 100%;
+
+    /* TODO: Remove later */
+    width: 400px;
+  }
+
+  .gallery-card {
+    width: 100%;
+    height: 400px;
+    position: relative;
+    overflow: hidden;
+
+    &.half {
+      height: 195px;
+
+      &:first-child {
+        margin-bottom: 10px;
+      }
+    }
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      min-width: 100%;
+      height: 100%;
+      max-width: none;
+      margin: 0;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      background-color: ${TEAL};
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 150ms linear;
+      z-index: 10;
+
+      .number {
+        font-size: 3rem;
+        color: #fff;
+      }
+
+      .separator {
+        width: 100px;
+        height: 1px;
+        background-color: #fff;
+        margin: 0.2rem 0 1rem;
+      }
+
+      .title {
+        font-size: 1.8rem;
+        letter-spacing: 0.02em;
+      }
+
+      &:hover {
+        opacity: 0.95;
+      }
+    }
+  }
+
+  @media screen and (max-width: 800px) {
+    flex-direction: column;
+    align-items: center;
+
+    .gallery-card,
+    .gallery-card.half {
+      height: auto;
+      /* width: 400px; */
+      /* max-width: 90%; */
+      margin: 0 auto;
+
+      img {
+        position: relative;
+        top: auto;
+        height: 200px;
+      }
+
+      .overlay {
+        position: relative;
+        height: auto;
+        opacity: 1;
+        background-color: transparent;
+        color: #999;
+        padding: 2rem;
+
+        .number {
+          color: ${TEAL};
+          font-size: 2.5rem;
+        }
+
+        .title {
+          font-size: 1.5rem;
+        }
+
+        .separator {
+          background-color: #999;
+          margin: 0.2rem 0 1rem;
+        }
+      }
+    }
+  }
+`
 
 const FeaturedGalleryCardRow = styled.div`
   padding: 0 1rem;
@@ -116,10 +239,13 @@ const FeaturedGalleryCard = styled.div`
   }
 `
 
-const Weddings = props => {
-  console.log(props)
-  const headerImage = props.data.prismicWeddingsPage.data.featured_image
-  const featuredGalleriesCards = props.data.prismicWeddingsPage.data.featured_galleries
+const Weddings = ({ data }) => {
+  console.log(data.sanityWeddingsPage)
+
+  const { featuredGalleries } = data.sanityWeddingsPage
+
+  const headerImage = data.prismicWeddingsPage.data.featured_image
+  const featuredGalleriesCards = data.prismicWeddingsPage.data.featured_galleries
     .slice(0, 3)
     .map(({ gallery }) => {
       const { data } = gallery.document[0]
@@ -138,42 +264,121 @@ const Weddings = props => {
       )
     })
 
-  const { faq } = props.data.prismicWeddingsPage.data
+  const { faq } = data.prismicWeddingsPage.data
+
+  const { mainImage } = data.sanityWeddingsPage
 
   return (
     <Layout>
       <SEO title="Weddings" />
       <PageHeader>
-        <Img
-          fluid={headerImage.localFile.childImageSharp.fluid}
-          alt={headerImage.alt}
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            minHeight: '100%',
-            minWidth: '100%',
-            zIndex: -1,
-          }}
+        <img
+          src={imageUrlFor(buildImageObj(mainImage))
+            .width(2000)
+            // .height(900)
+            .fit('crop')
+            .url()}
+          alt={mainImage.alt}
         />
-        <H2>Weddings</H2>
       </PageHeader>
 
       {/* Featured Galleries Section */}
       <Section>
         <Container>
           <H3>Featured</H3>
-          <FeaturedGalleryCardRow>
+          {/* <FeaturedGalleryCardRow>
             {featuredGalleriesCards}
-          </FeaturedGalleryCardRow>
+          </FeaturedGalleryCardRow> */}
+          <FeaturedGalleriesCollection>
+            <div className="col">
+              <Link to="/weddings">
+                <div className="gallery-card">
+                  <div className="overlay">
+                    <div className="number">01.</div>
+                    <div className="separator" />
+                    <div className="title">{featuredGalleries[0].title}</div>
+                  </div>
+                  <img
+                    src={imageUrlFor(
+                      buildImageObj(featuredGalleries[0].featuredImage)
+                    )
+                      .height(900)
+                      .fit('crop')
+                      .url()}
+                    alt={featuredGalleries[0].alt}
+                  />
+                </div>
+              </Link>
+            </div>
+            <div className="col">
+              <Link to="/weddings">
+                <div className="gallery-card half">
+                  <div className="overlay">
+                    <div className="number">02.</div>
+                    <div className="separator" />
+                    <div className="title">{featuredGalleries[0].title}</div>
+                  </div>
+                  <img
+                    src={imageUrlFor(buildImageObj(mainImage))
+                      .height(500)
+                      .fit('crop')
+                      .url()}
+                    alt={mainImage.alt}
+                  />
+                </div>
+              </Link>
+              <Link to="/weddings">
+                <div className="gallery-card half">
+                  <div className="overlay">
+                    <div className="number">03.</div>
+                    <div className="separator" />
+                    <div className="title">{featuredGalleries[0].title}</div>
+                  </div>
+                  <img
+                    src={imageUrlFor(buildImageObj(mainImage))
+                      .height(500)
+                      .fit('crop')
+                      .url()}
+                    alt={mainImage.alt}
+                  />
+                </div>
+              </Link>
+            </div>
+            <div className="col">
+              <Link to="/weddings">
+                <div className="gallery-card">
+                  <div className="overlay">
+                    <div className="number">04.</div>
+                    <div className="separator" />
+                    <div className="title">{featuredGalleries[0].title}</div>
+                  </div>
+                  <img
+                    src={imageUrlFor(buildImageObj(mainImage))
+                      .height(900)
+                      .fit('crop')
+                      .url()}
+                    alt={mainImage.alt}
+                  />
+                </div>
+              </Link>
+            </div>
+          </FeaturedGalleriesCollection>
         </Container>
       </Section>
 
       {/* Experience Section */}
       <Section>
         <Container>
-          <H3>The Wedding Experience</H3>
-          <WeddingExperienceSlider />
+          <div
+            className="slider-placeholder"
+            style={{ position: 'relative', margin: '1rem' }}
+          >
+            <H3>The Wedding Experience</H3>
+            {/* <WeddingExperienceSlider /> */}
+
+            <SimpleBorderDecorator xGap={25} yGap={23} />
+            <SimpleBorderDecorator xGap={18} yGap={30} />
+          </div>
         </Container>
       </Section>
 
@@ -185,7 +390,7 @@ const Weddings = props => {
       </Section>
 
       {/* FAQ Section */}
-      <Section bgColor={BLUE}>
+      <Section bgColor={TEAL}>
         <Container>
           <H3 style={{ color: '#fff' }}>F.A.Q.</H3>
           <Faq faq={faq} />
@@ -266,6 +471,55 @@ export const query = graphql`
             html
             text
           }
+        }
+      }
+    }
+    sanityWeddingsPage {
+      mainImage {
+        crop {
+          _key
+          _type
+          top
+          bottom
+          left
+          right
+        }
+        hotspot {
+          _key
+          _type
+          x
+          y
+          height
+          width
+        }
+        asset {
+          _id
+        }
+        alt
+      }
+      featuredGalleries {
+        title
+        featuredImage {
+          crop {
+            _key
+            _type
+            top
+            bottom
+            left
+            right
+          }
+          hotspot {
+            _key
+            _type
+            x
+            y
+            height
+            width
+          }
+          asset {
+            _id
+          }
+          alt
         }
       }
     }

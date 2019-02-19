@@ -5,7 +5,7 @@ const PageHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 500px;
+  height: 400px;
   color: #fff;
   overflow: hidden;
   flex-direction: column;
@@ -28,12 +28,22 @@ const PageHeader = styled.div`
     text-align: center;
   }
 
+  img {
+    width: 100%;
+    max-width: none;
+  }
+
   @media screen and (max-width: 800px) {
     h2 {
       font-size: 5rem;
     }
     h3 {
       font-size: 3rem;
+    }
+
+    img {
+      width: auto;
+      height: 100%;
     }
   }
 `

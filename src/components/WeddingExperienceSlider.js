@@ -1,14 +1,13 @@
+import Carousel from 'nuka-carousel'
 import React from 'react'
 import styled from 'styled-components'
-
-import Carousel from 'nuka-carousel'
-import { BLUE, GOLD } from './colors'
-
-import watercolor from '../images/blue-watercolor.jpg'
 import arrow from '../images/arrow.svg'
+import watercolor from '../images/blue-watercolor.jpg'
+import { BLUE, GOLD } from './colors'
 
 const SlideWrapper = styled.div`
   width: 700px;
+  max-width: 70vw;
   height: 230px;
   margin: 0 auto;
   display: flex;
@@ -47,11 +46,12 @@ const StepContent = styled.div`
   max-width: 90vw;
   width: 400px;
   height: 200px;
-  border: 3px solid ${GOLD};
+  /* border: 3px solid ${GOLD}; */
   padding: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 
   h5 {
     text-align: center;
@@ -110,9 +110,9 @@ const WeddingExperienceSlider = () => {
         }}
       >
         <SlideWrapper>
-          <StepContainer>
+          {/* <StepContainer>
             <span>1</span>
-          </StepContainer>
+          </StepContainer> */}
           <StepContent>
             <h5>Chat</h5>
             <p>
@@ -123,6 +123,8 @@ const WeddingExperienceSlider = () => {
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero,
               modi.
             </p>
+            {/* <SimpleBorderDecorator xGap={0} yGap={5} />
+            <SimpleBorderDecorator xGap={5} yGap={0} /> */}
           </StepContent>
         </SlideWrapper>
       </Carousel>

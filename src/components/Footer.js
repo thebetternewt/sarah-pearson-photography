@@ -162,7 +162,6 @@ export default () => (
             <FaFacebook />
             <FaTwitter />
             <FaInstagram />
-            <i class="fab fa-twitter" />
           </div>
         </div>
         <div className="col col-1">

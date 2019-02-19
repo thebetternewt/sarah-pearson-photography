@@ -11,6 +11,7 @@ const NavContainer = styled.div`
   top: 0;
   left: 0;
   background-color: rgba(255, 255, 255, 0.99);
+  z-index: 200;
 `
 
 const CloseButton = styled.button`
@@ -19,6 +20,8 @@ const CloseButton = styled.button`
   position: absolute;
   top: 15px;
   right: 15px;
+  border: none;
+  background-color: transparent;
   cursor: pointer;
 `
 
@@ -49,6 +52,7 @@ const Nav = styled.nav`
       align-items: center;
       flex: 1;
       flex-shrink: 0;
+      font-size: 1rem;
 
       a {
         text-decoration: none;

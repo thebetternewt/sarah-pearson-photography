@@ -56,7 +56,7 @@ const Navbar = styled.div`
   box-shadow: 6px 4px 14px rgba(0, 0, 0, 0.25);
   background: #fff;
   color: #555;
-  z-index: 10;
+  z-index: 100;
 
   @media screen and (min-width: 800px) {
     justify-content: center;

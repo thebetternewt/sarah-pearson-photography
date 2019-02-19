@@ -26,7 +26,7 @@ const SliderSection = styled.div`
 
   img {
     /* max-width: none; */
-    /* height: 100%; */
+    height: 100%;
     position: absolute;
     top: 0;
     left: 50%;
@@ -200,9 +200,13 @@ const LogosRow = styled.div`
 `
 
 const IndexPage = ({ data }) => {
-  const page = data.sanityHomepage
-  console.log(page)
-  const { mainImage, welcomeImage, portraitsImage, weddingsImage } = page
+  const {
+    mainImage,
+    welcomeImage,
+    portraitsImage,
+    weddingsImage,
+    welcomeText,
+  } = data.sanityHomepage
   // const slides =
   //   props.data.prismicHomepage.data.home_slider.document[0].data.slides
   // const familyPortrait =
@@ -221,7 +225,7 @@ const IndexPage = ({ data }) => {
         <img
           src={imageUrlFor(buildImageObj(mainImage))
             // .width(2000)
-            .height(450)
+            .height(900)
             .fit('crop')
             .url()}
           alt={mainImage.alt}
@@ -258,7 +262,7 @@ const IndexPage = ({ data }) => {
                 <hr />
               </div>
               <WelcomeMessage>
-                {page.welcomeText}
+                {welcomeText}
                 <Link to="/sarah" style={{ marginTop: '2rem' }}>
                   <Button className="color" align="center">
                     Learn More About Me
