@@ -1,13 +1,14 @@
 import { Link } from 'gatsby'
 import PropTypes from 'prop-types'
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { FaBars } from 'react-icons/fa'
 import styled from 'styled-components'
 import logo from '../images/spp_logo.png'
-import { GOLD } from './colors'
+import { GOLD } from '../ui/colors'
 import './layout.css'
 import MobileNav from './MobileNav'
 import Nav from './Nav'
+import Footer from './Footer'
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -46,14 +47,14 @@ const Navbar = styled.div`
   position: sticky;
   top: 0;
   width: 100%;
-  height: 60px;
+  height: 70px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 20px 1rem;
   /* border-top: 2px solid ${GOLD};
   border-bottom: 2px solid ${GOLD}; */
-  box-shadow: 6px 4px 14px rgba(0, 0, 0, 0.25);
+  box-shadow: 6px 8px 14px -14px rgba(0, 0, 0, 0.25);
   background: #fff;
   color: #555;
   z-index: 100;
@@ -103,41 +104,32 @@ const ContentWrapper = styled.div`
   color: #555;
 `
 
-class Layout extends Component {
-  state = {
-    showNav: false,
-  }
+const Layout = ({ children }) => {
+  const [showNav, setShowNav] = useState(false)
 
-  toggleNav = () =>
-    this.setState(({ showNav }) => ({
-      showNav: !showNav,
-    }))
+  const toggleNav = () => setShowNav(!showNav)
 
-  render() {
-    const { children } = this.props
-    const { showNav } = this.state
-
-    return (
-      <>
-        <HeaderWrapper>
-          <HeaderTitle>
-            Sarah Pearson <span>Photography</span>
-          </HeaderTitle>
-        </HeaderWrapper>
-        <Navbar>
-          <Logo to="/">
-            <img src={logo} alt="SP" />
-          </Logo>
-          <MobileNavToggle>
-            <FaBars size={24} color="#555" onClick={this.toggleNav} />
-          </MobileNavToggle>
-          {showNav && <MobileNav close={this.toggleNav} />}
-          <Nav />
-        </Navbar>
-        <ContentWrapper>{children}</ContentWrapper>
-      </>
-    )
-  }
+  return (
+    <>
+      <HeaderWrapper>
+        <HeaderTitle>
+          Sarah Pearson <span>Photography</span>
+        </HeaderTitle>
+      </HeaderWrapper>
+      <Navbar>
+        <Logo to="/">
+          <img src={logo} alt="SP" />
+        </Logo>
+        <MobileNavToggle>
+          <FaBars size={24} color="#555" onClick={toggleNav} />
+        </MobileNavToggle>
+        {showNav && <MobileNav close={toggleNav} />}
+        <Nav />
+      </Navbar>
+      <ContentWrapper>{children}</ContentWrapper>
+      <Footer />
+    </>
+  )
 }
 
 Layout.propTypes = {

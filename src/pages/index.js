@@ -15,6 +15,129 @@ import { H3 } from '../components/ui/text'
 import msMagazineLogo from '../images/MississippiMagazineLogo.png'
 import { buildImageObj } from '../lib/helpers'
 import { imageUrlFor } from '../lib/image-url'
+import { script } from '../ui/fonts'
+
+const IndexPage = ({ data }) => {
+  const {
+    mainImage,
+    welcomeImage,
+    portraitsImage,
+    weddingsImage,
+    welcomeText,
+  } = data.sanityHomepage
+  // const slides =
+  //   props.data.prismicHomepage.data.home_slider.document[0].data.slides
+  // const familyPortrait =
+  //   props.data.prismicHomepage.data.family_portrait.localFile.childImageSharp
+  //     .fluid
+  // const portraitsBgImage =
+  //   props.data.prismicHomepage.data.portraits_link_background_image.localFile
+  //     .childImageSharp.fluid
+  // const weddingsBgImage =
+  //   props.data.prismicHomepage.data.weddings_link_background_image.localFile
+  //     .childImageSharp.fluid
+  // const welcomeMessage = props.data.prismicHomepage.data.welcome_message.html
+  return (
+    <Layout>
+      <SliderSection>
+        <img
+          src={imageUrlFor(buildImageObj(mainImage))
+            // .width(2000)
+            .width(1600)
+            .fit('crop')
+            .url()}
+          alt={mainImage.alt}
+        />
+      </SliderSection>
+      <SEO title="Home" keywords={[`weddings`, `portraits`, `photography`]} />
+      {/* Welcome Section */}
+      <WelcomeSection>
+        <Container>
+          <div className="mobile-heading">
+            <h3>Welcome</h3>
+            <h4 className="greeting">Meet Sarah</h4>
+            <hr />
+          </div>
+          <div className="row">
+            <div>
+              <div className="image-wrapper">
+                <img
+                  src={imageUrlFor(buildImageObj(welcomeImage))
+                    .width(600)
+                    // .height(450)
+                    .fit('crop')
+                    .url()}
+                  alt={welcomeImage.alt}
+                />
+                <SimpleBorderDecorator yGap={18} xGap={10} />
+                <SimpleBorderDecorator yGap={10} xGap={18} />
+              </div>
+            </div>
+            <div>
+              <div className="desktop-heading">
+                <H3>Welcome</H3>
+                <h4 className="greeting">Meet Sarah</h4>
+                <hr />
+              </div>
+              <WelcomeMessage>
+                {welcomeText}
+                <Link to="/sarah" style={{ marginTop: '2rem' }}>
+                  <Button className="color" align="center">
+                    Learn More About Me
+                  </Button>
+                </Link>
+              </WelcomeMessage>
+            </div>
+          </div>
+        </Container>
+      </WelcomeSection>
+
+      {/* Categories Section */}
+      <section>
+        <GridRow>
+          <CategoryLinkCard dark>
+            <img
+              src={imageUrlFor(buildImageObj(portraitsImage))
+                .width(1000)
+                .height(400)
+                .fit('crop')
+                .url()}
+              alt={portraitsImage.alt}
+            />
+            <CategoryCardContent>
+              <CategoryCardTitle>Portraits</CategoryCardTitle>
+              <CategoryLink to="/portraits" className="dark">
+                Gallery
+              </CategoryLink>
+            </CategoryCardContent>
+          </CategoryLinkCard>
+          <CategoryLinkCard>
+            <img
+              src={imageUrlFor(buildImageObj(weddingsImage))
+                .width(1000)
+                .height(400)
+                .fit('crop')
+                .url()}
+              alt={weddingsImage.alt}
+            />
+            <CategoryCardContent>
+              <CategoryCardTitle>Weddings</CategoryCardTitle>
+              <CategoryLink to="/weddings">Gallery</CategoryLink>
+            </CategoryCardContent>
+          </CategoryLinkCard>
+        </GridRow>
+      </section>
+
+      {/* As Seen In Section */}
+      <Section>
+        <H3>As Seen In</H3>
+        <LogosRow>
+          <img src={msMagazineLogo} alt="Mississippi Magazine" />
+        </LogosRow>
+      </Section>
+    </Layout>
+  )
+}
 
 const SliderSection = styled.div`
   background-color: #fff;
@@ -26,7 +149,7 @@ const SliderSection = styled.div`
 
   img {
     /* max-width: none; */
-    height: 100%;
+    /* height: 100%; */
     position: absolute;
     top: 0;
     left: 50%;
@@ -72,6 +195,12 @@ const WelcomeSection = styled(Section)`
 
   .mobile-heading {
     display: none;
+    font-family: ${script};
+    font-weight: normal;
+    color: #9fbebc;
+    font-size: 3rem;
+    text-align: center;
+    margin: 0.5em 0 0.2em;
   }
 
   .greeting {
@@ -198,131 +327,6 @@ const LogosRow = styled.div`
     opacity: 0.6;
   }
 `
-
-const IndexPage = ({ data }) => {
-  const {
-    mainImage,
-    welcomeImage,
-    portraitsImage,
-    weddingsImage,
-    welcomeText,
-  } = data.sanityHomepage
-  // const slides =
-  //   props.data.prismicHomepage.data.home_slider.document[0].data.slides
-  // const familyPortrait =
-  //   props.data.prismicHomepage.data.family_portrait.localFile.childImageSharp
-  //     .fluid
-  // const portraitsBgImage =
-  //   props.data.prismicHomepage.data.portraits_link_background_image.localFile
-  //     .childImageSharp.fluid
-  // const weddingsBgImage =
-  //   props.data.prismicHomepage.data.weddings_link_background_image.localFile
-  //     .childImageSharp.fluid
-  // const welcomeMessage = props.data.prismicHomepage.data.welcome_message.html
-  return (
-    <Layout>
-      <SliderSection>
-        <img
-          src={imageUrlFor(buildImageObj(mainImage))
-            // .width(2000)
-            .height(900)
-            .fit('crop')
-            .url()}
-          alt={mainImage.alt}
-        />
-      </SliderSection>
-      <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
-      {/* Welcome Section */}
-      <WelcomeSection>
-        <Container>
-          <div className="mobile-heading">
-            <H3>Welcome</H3>
-            <h4 className="greeting">Meet Sarah</h4>
-            <hr />
-          </div>
-          <div className="row">
-            <div>
-              <div className="image-wrapper">
-                <img
-                  src={imageUrlFor(buildImageObj(welcomeImage))
-                    .width(600)
-                    // .height(450)
-                    .fit('crop')
-                    .url()}
-                  alt={welcomeImage.alt}
-                />
-                <SimpleBorderDecorator yGap={18} xGap={10} />
-                <SimpleBorderDecorator yGap={10} xGap={18} />
-              </div>
-            </div>
-            <div>
-              <div className="desktop-heading">
-                <H3>Welcome</H3>
-                <h4 className="greeting">Meet Sarah</h4>
-                <hr />
-              </div>
-              <WelcomeMessage>
-                {welcomeText}
-                <Link to="/sarah" style={{ marginTop: '2rem' }}>
-                  <Button className="color" align="center">
-                    Learn More About Me
-                  </Button>
-                </Link>
-              </WelcomeMessage>
-            </div>
-          </div>
-        </Container>
-      </WelcomeSection>
-
-      {/* Categories Section */}
-      <section>
-        <GridRow>
-          <CategoryLinkCard dark>
-            <img
-              src={imageUrlFor(buildImageObj(portraitsImage))
-                .width(1000)
-                .height(400)
-                .fit('crop')
-                .url()}
-              alt={portraitsImage.alt}
-            />
-            <CategoryCardContent>
-              <CategoryCardTitle>Portraits</CategoryCardTitle>
-              <CategoryLink to="/portraits" className="dark">
-                Gallery
-              </CategoryLink>
-            </CategoryCardContent>
-          </CategoryLinkCard>
-          <CategoryLinkCard>
-            <img
-              src={imageUrlFor(buildImageObj(weddingsImage))
-                .width(1000)
-                .height(400)
-                .fit('crop')
-                .url()}
-              alt={weddingsImage.alt}
-            />
-            <CategoryCardContent>
-              <CategoryCardTitle>Weddings</CategoryCardTitle>
-              <CategoryLink to="/weddings">Gallery</CategoryLink>
-            </CategoryCardContent>
-          </CategoryLinkCard>
-        </GridRow>
-      </section>
-
-      {/* As Seen In Section */}
-      <Section>
-        <H3>As Seen In</H3>
-        <LogosRow>
-          <img src={msMagazineLogo} alt="Mississippi Magazine" />
-        </LogosRow>
-      </Section>
-
-      {/* Contact Section */}
-      <Footer />
-    </Layout>
-  )
-}
 
 export default IndexPage
 

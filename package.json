@@ -19,7 +19,7 @@
     "gatsby-source-filesystem": "^2.0.8",
     "gatsby-source-instagram": "^0.2.0",
     "gatsby-source-prismic": "^2.2.0",
-    "gatsby-source-sanity": "^1.1.0",
+    "gatsby-source-sanity": "^4.0.1",
     "gatsby-transformer-sharp": "^2.1.8",
     "nuka-carousel": "^4.4.5",
     "prop-types": "^15.6.2",

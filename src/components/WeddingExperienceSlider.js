@@ -3,7 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 import arrow from '../images/arrow.svg'
 import watercolor from '../images/blue-watercolor.jpg'
-import { BLUE, GOLD } from './colors'
+import { BLUE, GOLD } from '../ui/colors'
 
 const SlideWrapper = styled.div`
   width: 700px;
