@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import ContactForm from './ContactForm'
 import InstaWidget from './InstaWidget'
 import { H3 } from './ui/text'
-import { Container } from './ui/layout'
+import { Container } from '../ui/layout'
 import Nav from './Nav'
 
 import watercolor from '../images/blue-watercolor.jpg'

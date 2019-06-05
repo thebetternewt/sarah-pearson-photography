@@ -5,12 +5,7 @@ import Layout from '../../components/layout'
 import PageHeader from '../../components/PageHeader'
 import SEO from '../../components/seo'
 import { Button } from '../../components/ui/buttons'
-import {
-  Container,
-  Section,
-  SimpleBorderDecorator,
-} from '../../components/ui/layout'
-import { H1, H3 } from '../../components/ui/text'
+import { Container, Section, SimpleBorderDecorator } from '../../ui/layout'
 import { buildImageObj } from '../../lib/helpers'
 import { imageUrlFor } from '../../lib/image-url'
 import { normal, script } from '../../ui/fonts'
@@ -21,6 +16,7 @@ import {
   FeaturedGalleryCardRow,
   FeaturedGalleryCardWrapper,
 } from '../../components/FeaturedGalleriesCollection'
+import { TEAL } from '../../ui/colors'
 
 const Weddings = ({ data }) => {
   console.log(data.sanityWeddingsPage)
@@ -47,23 +43,21 @@ const Weddings = ({ data }) => {
       )
     })
 
-  const { faq } = data.prismicWeddingsPage.data
-
   const { mainImage } = data.sanityWeddingsPage
 
   return (
     <Layout>
       <SEO title="Weddings" />
       <PageHeader>
-        {/* <img
+        <img
           src={imageUrlFor(buildImageObj(mainImage))
-            .width(2000)
-            // .height(900)
+            .width(1600)
+            .height(400)
             .fit('crop')
             .url()}
           alt={mainImage.alt}
-        /> */}
-        <Img
+        />
+        {/* <Img
           fluid={mainImage.asset.fluid}
           alt={mainImage.alt}
           style={{
@@ -76,7 +70,7 @@ const Weddings = ({ data }) => {
             zIndex: -1,
             transform: `translate3d(-50%,-50%, 0)`,
           }}
-        />
+        /> */}
       </PageHeader>
 
       {/* Featured Galleries Section */}
@@ -93,10 +87,17 @@ const Weddings = ({ data }) => {
           >
             Weddings
           </h1>
-          <H3>Featured</H3>
-          {/* <FeaturedGalleryCardRow>
-            {featuredGalleriesCards}
-          </FeaturedGalleryCardRow> */}
+          <h3
+            style={{
+              fontFamily: script,
+              fontSize: '3.5rem',
+              fontWeight: 'normal',
+              textAlign: 'center',
+              color: TEAL,
+            }}
+          >
+            Featured Galleries
+          </h3>
           <FeaturedGalleriesCollection>
             <div className="col">
               <Link to="/weddings">
@@ -174,24 +175,8 @@ const Weddings = ({ data }) => {
         </Container>
       </Section>
 
-      {/* Experience Section */}
-      <ExperienceSection bgImage={data.sunset} />
+      <ExperienceSection />
 
-      {/* Investment Section */}
-      {/* <Section bgColor="#eee">
-        <Container>
-          <H3>Investment</H3>
-        </Container>
-      </Section> */}
-
-      {/* FAQ Section */}
-      {/* <Section bgColor={TEAL}>
-        <Container>
-          <H3 style={{ color: '#fff' }}>F.A.Q.</H3>
-          <Faq faq={faq} />
-        </Container>
-      </Section> */}
-      {/* Videography Section */}
       <Section>
         <Container>
           <p
@@ -208,9 +193,6 @@ const Weddings = ({ data }) => {
           </Button>
         </Container>
       </Section>
-
-      {/* Contact Section */}
-      {/* <Contact /> */}
     </Layout>
   )
 }
@@ -299,9 +281,9 @@ export const query = graphql`
         }
         asset {
           _id
-          fluid {
-            ...GatsbySanityImageFluid
-          }
+          # fluid {
+          #   ...GatsbySanityImageFluid
+          # }
         }
         alt
       }

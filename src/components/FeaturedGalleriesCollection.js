@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 import { TEAL } from '../ui/colors'
+import { script } from '../ui/fonts'
 
 export const FeaturedGalleriesCollection = styled.div`
   display: flex;
@@ -71,6 +72,7 @@ export const FeaturedGalleriesCollection = styled.div`
       .title {
         font-size: 1.8rem;
         letter-spacing: 0.02em;
+        /* margin-bottom: 1em */
       }
 
       &:hover {
@@ -93,7 +95,9 @@ export const FeaturedGalleriesCollection = styled.div`
       img {
         position: relative;
         top: auto;
-        height: 200px;
+        max-height: 200px;
+        width: auto;
+        min-width: 0;
       }
 
       .overlay {

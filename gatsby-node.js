@@ -1,32 +1,52 @@
 const path = require('path')
+const slugify = require('slugify')
 
-exports.createPages = ({ graphql, actions }) => {
+exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
 
-  return graphql(`
+  const posts = await graphql(`
     {
-      allPrismicGalleryPost {
+      allSanityPost {
         edges {
           node {
             id
-            uid
-            type
-            data {
-              category
+            slug {
+              current
+            }
+            title
+            mainImage {
+              asset {
+                url
+              }
+            }
+            category {
+              title
+            }
+            gallery {
+              id
+              title
             }
           }
         }
       }
     }
-  `).then(result => {
-    result.data.allPrismicGalleryPost.edges.map(({ node }) => {
-      createPage({
-        path: `${node.data.category}/${node.uid}`,
-        component: path.resolve(`./src/templates/galleryPost.js`),
-        context: {
-          id: node.id,
-        },
-      })
+  `)
+
+  posts.data.allSanityPost.edges.map(({ node }) => {
+    createPage({
+      path: `${node.category.title}/${node.slug.current}`,
+      component: path.resolve(`./src/templates/galleryPost.js`),
+      context: {
+        id: node.id,
+      },
+    })
+
+    createPage({
+      path: `galleries/${node.slug.current}}`,
+      component: path.resolve(`./src/templates/GalleryPage.js`),
+      context: {
+        id: node.gallery.id,
+      },
     })
   })
 }

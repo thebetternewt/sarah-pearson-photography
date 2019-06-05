@@ -4,7 +4,7 @@ import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa'
 import styled from 'styled-components'
 import watercolor from '../images/blue-watercolor.jpg'
 import InstaWidget from './InstaWidget'
-import { Container, SimpleBorderDecorator } from './ui/layout'
+import { Container, SimpleBorderDecorator } from '../ui/layout'
 
 const FooterWrapper = styled.footer`
   /* background-image: url(${watercolor}); */

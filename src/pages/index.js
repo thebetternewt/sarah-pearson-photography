@@ -10,7 +10,7 @@ import {
   GridRow,
   Section,
   SimpleBorderDecorator,
-} from '../components/ui/layout'
+} from '../ui/layout'
 import { H3 } from '../components/ui/text'
 import msMagazineLogo from '../images/MississippiMagazineLogo.png'
 import { buildImageObj } from '../lib/helpers'

@@ -4,11 +4,12 @@ const PageHeader = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
   height: 400px;
   color: #fff;
   overflow: hidden;
   flex-direction: column;
+  /* text-align: center; */
 
   h2 {
     font-family: 'Pinyon Script', Helvetica, Arial, sans-serif;
@@ -29,7 +30,7 @@ const PageHeader = styled.div`
   }
 
   img {
-    width: 100%;
+    min-width: 100%;
     max-width: none;
   }
 
@@ -41,10 +42,10 @@ const PageHeader = styled.div`
       font-size: 3rem;
     }
 
-    img {
+    /* img {
       width: auto;
       height: 100%;
-    }
+    } */
   }
 `
 

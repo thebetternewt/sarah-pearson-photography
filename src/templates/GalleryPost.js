@@ -2,21 +2,24 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import styled from 'styled-components'
+import BlockContent from '@sanity/block-content-to-react'
 
 import Layout from '../components/layout'
 import PageHeader from '../components/PageHeader'
-import { Section, Container } from '../components/ui/layout'
+import { Section, Container } from '../ui/layout'
 import { FaTags } from 'react-icons/fa'
 import { BLUE } from '../ui/colors'
 import { normal, script } from '../ui/fonts'
+import { buildImageObj } from '../lib/helpers'
+import { imageUrlFor } from '../lib/image-url'
 
 const galleryPost = ({ data }) => {
-  const post = data.prismicGalleryPost
-
+  console.log('post data:', data)
+  const post = data.sanityPost
   return (
     <Layout>
       <PageHeader>
-        <Img
+        {/* <Img
           fluid={post.data.featured_image.localFile.childImageSharp.fluid}
           alt={post.data.featured_image.alt}
           style={{
@@ -29,9 +32,17 @@ const galleryPost = ({ data }) => {
             zIndex: -1,
             transform: `translate3d(-50%,-50%, 0)`,
           }}
-        />
+        /> */}
         {/* <h2>{post.data.title.text}</h2>
           <h3>{post.data.subtitle.text}</h3> */}
+        <img
+          src={imageUrlFor(buildImageObj(post.mainImage))
+            .width(1600)
+            .height(400)
+            .fit('crop')
+            .url()}
+          alt={post.mainImage.alt}
+        />
       </PageHeader>
       <Section>
         <Container>
@@ -39,35 +50,30 @@ const galleryPost = ({ data }) => {
             <div className="detail">
               <Breadcrumbs>
                 Blog<span>/</span>
-                {post.data.category}
+                {post.category.title}
               </Breadcrumbs>
               <Tags>
                 <FaTags size="28" color="#aaa" />
-                <ul>
+                {/* <ul>
                   {post.tags.map(tag => (
                     <li key={tag}>
                       <span>{tag}</span>
                     </li>
                   ))}
-                </ul>
+                </ul> */}
               </Tags>
             </div>
             <div className="heading">
-              <h1>{post.data.title.text}</h1>
-              <h2>{post.data.subtitle.text}</h2>
+              <h1>{post.title}</h1>
+              {/* <h2>{post.data.subtitle.text}</h2> */}
             </div>
 
-            <div
-              className="content"
-              dangerouslySetInnerHTML={{ __html: post.data.body.html }}
-            />
+            <div className="content">
+              <BlockContent blocks={post._rawBody} />
+            </div>
             <Gallery>
-              {post.data.gallery.map(({ image: { alt, localFile } }) => (
-                <Img
-                  key={localFile.id}
-                  alt={alt}
-                  fluid={localFile.childImageSharp.fluid}
-                />
+              {post.gallery.images.map(({ asset }) => (
+                <Img key={asset._id} alt={asset.caption} fluid={asset.fluid} />
               ))}
             </Gallery>
           </Post>
@@ -79,45 +85,47 @@ const galleryPost = ({ data }) => {
 
 export const query = graphql`
   query GalleryPost($id: String!) {
-    prismicGalleryPost(id: { eq: $id }) {
-      type
+    sanityPost(id: { eq: $id }) {
       id
-      uid
-      tags
-      first_publication_date
-      data {
-        category
-        title {
-          text
+      title
+      mainImage {
+        crop {
+          _key
+          _type
+          top
+          bottom
+          left
+          right
         }
-        subtitle {
-          text
+        hotspot {
+          _key
+          _type
+          x
+          y
+          height
+          width
         }
-        body {
-          html
+        asset {
+          _id
+          url
         }
-        featured_image {
-          localFile {
-            childImageSharp {
-              fluid(maxWidth: 1600) {
-                ...GatsbyImageSharpFluid
-              }
+        alt
+      }
+      category {
+        id
+        title
+      }
+      _rawBody
+      gallery {
+        title
+        description
+        images {
+          caption
+          asset {
+            _id
+            fluid(maxWidth: 1200) {
+              ...GatsbySanityImageFluid
             }
-          }
-          alt
-        }
-
-        gallery {
-          image {
-            localFile {
-              id
-              childImageSharp {
-                fluid(maxWidth: 1200) {
-                  ...GatsbyImageSharpFluid
-                }
-              }
-            }
-            alt
           }
         }
       }

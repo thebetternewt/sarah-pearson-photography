@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { GridRow } from './ui/layout'
+import { GridRow } from '../ui/layout'
 import { GOLD } from '../ui/colors'
 
 const Form = styled.form`

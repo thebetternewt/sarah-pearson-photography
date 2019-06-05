@@ -27,12 +27,12 @@ export const GridRow = styled.div`
 
 export const SimpleBorderDecorator = styled.div`
   position: absolute;
-  border: 1px solid #ccc;
+  border: ${({ color }) => `1px solid ${color || '#ccc'}`};
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
+  /* z-index: 10; */
 
   ${({ xGap, yGap }) => {
     let styles = ''

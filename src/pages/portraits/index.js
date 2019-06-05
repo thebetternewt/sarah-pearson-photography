@@ -7,11 +7,12 @@ import Layout from '../../components/layout'
 import Contact from '../../components/Contact'
 import SEO from '../../components/seo'
 import { H2, H3 } from '../../components/ui/text'
-import { Section, Container } from '../../components/ui/layout'
-import { BLUE } from '../../ui/colors'
-import WeddingExperienceSlider from '../../components/WeddingExperienceSlider'
+import { Section, Container, SimpleBorderDecorator } from '../../ui/layout'
+import { BLUE, TEAL } from '../../ui/colors'
 import Faq from '../../components/faq'
 import PageHeader from '../../components/PageHeader'
+import { script } from '../../ui/fonts'
+import Divider from '../../ui/Divider'
 
 const FeaturedGalleryCardRow = styled.div`
   padding: 0 1rem;
@@ -85,7 +86,7 @@ const FeaturedGalleryCard = styled.div`
   }
 
   h5 {
-    font-family: 'Pinyon Script', Helvetica, Arial, sans-serif;
+    font-family: script;
     font-weight: normal;
     color: #fff;
     font-size: 2rem;
@@ -169,10 +170,49 @@ const Portraits = props => {
       </Section>
 
       {/* Experience Section */}
-      <Section>
-        <Container>
-          <H3>The Portrait Experience</H3>
-          <WeddingExperienceSlider />
+      <Section
+        style={{
+          background:
+            'url(https://images.pexels.com/photos/1024744/pexels-photo-1024744.jpeg?auto=format%2Ccompress&cs=tinysrgb&dpr=2&w=500)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'none',
+        }}
+      >
+        <Container
+          style={{
+            background: 'rgba(255,255,255,0.85)',
+            padding: '3rem 1rem',
+            textAlign: 'center',
+            position: 'relative',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <h3
+            style={{
+              fontFamily: script,
+              fontSize: '3.5rem',
+              fontWeight: 'normal',
+              textAlign: 'center',
+              color: TEAL,
+            }}
+          >
+            The Portrait Experience
+          </h3>
+          <Divider />
+          <SliderContent>
+            <h5>Let's Chat!</h5>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus
+              voluptatibus accusantium dignissimos ipsum illo assumenda
+              officiis, aperiam, iste saepe illum id magni! Dolore, perspiciatis
+              sed! Harum fugit incidunt vero nisi.
+            </p>
+          </SliderContent>
+          <SimpleBorderDecorator xGap={15} yGap={30} />
+          <SimpleBorderDecorator xGap={25} yGap={20} color="#fff" />
         </Container>
       </Section>
 
@@ -258,5 +298,30 @@ export const query = graphql`
         }
       }
     }
+  }
+`
+
+const SliderContent = styled.div`
+  max-width: 90vw;
+  width: 400px;
+  height: 200px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+
+  h5 {
+    text-align: center;
+    font-family: 'Pinyon Script', Helvetica, Arial, sans-serif;
+    font-size: 2rem;
+    font-weight: normal;
+    margin: 0.3em 0;
+    color: ${BLUE};
+  }
+
+  p,
+  li {
+    font-size: 0.9rem;
   }
 `
