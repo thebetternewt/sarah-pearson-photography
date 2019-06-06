@@ -35,7 +35,7 @@ exports.createPages = async ({ graphql, actions }) => {
   posts.data.allSanityPost.edges.map(({ node }) => {
     createPage({
       path: `${node.category.title}/${node.slug.current}`,
-      component: path.resolve(`./src/templates/galleryPost.js`),
+      component: path.resolve(`./src/templates/GalleryPost.js`),
       context: {
         id: node.id,
       },
