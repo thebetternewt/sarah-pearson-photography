@@ -42,7 +42,7 @@ exports.createPages = async ({ graphql, actions }) => {
     })
 
     createPage({
-      path: `galleries/${node.slug.current}}`,
+      path: `galleries/${node.slug.current}`,
       component: path.resolve(`./src/templates/GalleryPage.js`),
       context: {
         id: node.gallery.id,

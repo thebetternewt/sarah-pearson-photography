@@ -32,7 +32,6 @@ export const SimpleBorderDecorator = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  /* z-index: 10; */
 
   ${({ xGap, yGap }) => {
     let styles = ''
@@ -52,4 +51,8 @@ export const SimpleBorderDecorator = styled.div`
 
     return styles
   }}
+
+  @media screen and (max-width: 1000px) {
+    ${({ hideMd }) => hideMd && `display: none;`}
+  }
 `

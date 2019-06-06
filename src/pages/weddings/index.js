@@ -175,7 +175,7 @@ const Weddings = ({ data }) => {
         </Container>
       </Section>
 
-      <ExperienceSection />
+      <ExperienceSection title="The Wedding Experience" />
 
       <Section>
         <Container>

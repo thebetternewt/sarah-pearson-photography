@@ -6,19 +6,22 @@ import { script } from '../../ui/fonts'
 import { BLUE, TEAL } from '../../ui/colors'
 import Divider from '../../ui/Divider'
 
-const ExperienceSection = () => (
+import sunset from '../../images/sunset.jpg'
+
+const ExperienceSection = ({ title }) => (
   <Section
     style={{
-      background:
-        'url(https://images.pexels.com/photos/1024744/pexels-photo-1024744.jpeg?auto=format%2Ccompress&cs=tinysrgb&dpr=2&w=500)',
+      // background:
+      //   'url(https://images.pexels.com/photos/1024744/pexels-photo-1024744.jpeg?auto=format%2Ccompress&cs=tinysrgb&dpr=2&w=500)',
+      background: `url(${sunset})`,
       backgroundSize: 'cover',
-      backgroundPosition: 'center',
+      backgroundPosition: 'bottom',
       backgroundRepeat: 'none',
     }}
   >
     <Container
       style={{
-        background: 'rgba(255,255,255,0.85)',
+        background: 'rgba(255,255,255,0.9)',
         padding: '3rem 1rem',
         textAlign: 'center',
         position: 'relative',
@@ -36,7 +39,7 @@ const ExperienceSection = () => (
           color: TEAL,
         }}
       >
-        The Portrait Experience
+        {title}
       </h3>
       <Divider />
       <ExperienceContent>
@@ -48,8 +51,8 @@ const ExperienceSection = () => (
           fugit incidunt vero nisi.
         </p>
       </ExperienceContent>
-      <SimpleBorderDecorator xGap={15} yGap={30} />
-      <SimpleBorderDecorator xGap={25} yGap={20} color="#fff" />
+      <SimpleBorderDecorator xGap={15} yGap={30} hideMd />
+      <SimpleBorderDecorator xGap={25} yGap={20} color="#fff" hideMd />
     </Container>
   </Section>
 )
