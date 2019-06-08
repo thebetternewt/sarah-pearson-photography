@@ -3,7 +3,6 @@ import styled from 'styled-components'
 
 import ContactForm from './ContactForm'
 import InstaWidget from './InstaWidget'
-import { H3 } from './ui/text'
 import { Container } from '../ui/layout'
 import Nav from './Nav'
 
@@ -18,7 +17,7 @@ const ContactSection = styled.section`
 export default () => (
   <ContactSection>
     <Container>
-      <H3>Contact</H3>
+      <h3>Contact</h3>
       <ContactForm />
       <InstaWidget />
       <Nav />
