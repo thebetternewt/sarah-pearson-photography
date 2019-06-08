@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import watercolor from '../images/blue-watercolor.jpg'
 import InstaWidget from './InstaWidget'
 import { Container, SimpleBorderDecorator } from '../ui/layout'
+import { script } from '../ui/fonts'
 
 const FooterWrapper = styled.footer`
   /* background-image: url(${watercolor}); */
@@ -23,7 +24,7 @@ const FooterWrapper = styled.footer`
   }
 
   .header {
-    font-family: 'Pinyon Script', Helvetica, Arial, sans-serif;
+    font-family: ${script};
     font-weight: 300;
     font-size: 2.3rem;
     text-align: center;
@@ -139,8 +140,8 @@ export default () => (
         <h4 className="header">Follow along on Instagram</h4>
         <div className="divider" />
         <InstaWidget />
-        <SimpleBorderDecorator xGap={15} yGap={30} />
-        <SimpleBorderDecorator xGap={25} yGap={20} />
+        <SimpleBorderDecorator xGap={25} yGap={30} />
+        <SimpleBorderDecorator xGap={30} yGap={25} />
       </InstaWidgetWrapper>
       <div className="row">
         <div className="col col-1">

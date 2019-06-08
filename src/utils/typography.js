@@ -1,4 +1,4 @@
-import Typography from 'typography';
+import Typography from 'typography'
 // import grandViewTheme from 'typography-theme-grand-view'
 
 const typography = new Typography({
@@ -11,10 +11,6 @@ const typography = new Typography({
     {
       name: 'Pinyon Script',
       styles: ['400'],
-    },
-    {
-      name: 'Lora',
-      styles: ['400', '400i', '700', '700i'],
     },
     {
       name: 'Baskerville',

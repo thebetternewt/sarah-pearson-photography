@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { desktopOnly } from '../utils/hide'
 
 export const Section = styled.section`
   padding: 3rem 0;
@@ -33,18 +34,18 @@ export const SimpleBorderDecorator = styled.div`
   width: 100%;
   height: 100%;
 
-  ${({ xGap, yGap }) => {
+  ${({ xGap = 0, yGap = 0 }) => {
     let styles = ''
     if (yGap) {
       styles += `
-      top: -${yGap}px;
+      top: ${-yGap}px;
       height: calc(100% + ${2 * yGap}px);
       `
     }
 
     if (xGap) {
       styles += `
-      left: -${xGap}px;
+      left: ${-xGap}px;
       width: calc(100% + ${2 * xGap}px);
       `
     }
@@ -55,4 +56,6 @@ export const SimpleBorderDecorator = styled.div`
   @media screen and (max-width: 1000px) {
     ${({ hideMd }) => hideMd && `display: none;`}
   }
+
+  ${({ hideMobile }) => hideMobile && desktopOnly}
 `

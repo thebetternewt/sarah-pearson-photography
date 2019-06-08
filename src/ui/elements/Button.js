@@ -1,13 +1,15 @@
 import styled from 'styled-components'
 
-export const Button = styled.button`
+import { normal } from '../fonts'
+
+const Button = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
   border: 1.5px solid #fff;
   height: 3rem;
   width: auto;
-  font-family: 'Lora', Helvetica, Arial, sans-serif;
+  font-family: ${normal};
   text-decoration: none;
   color: #000;
   font-size: 1.2rem;
@@ -35,6 +37,7 @@ export const Button = styled.button`
   }
 
   &.dark {
+    background-color: transparent;
     color: #000;
     border-color: #000;
 
@@ -65,3 +68,4 @@ export const Button = styled.button`
     }
   }
 `
+export default Button

@@ -1,21 +1,21 @@
 import { graphql, Link } from 'gatsby'
 import React from 'react'
 import styled from 'styled-components'
-import Footer from '../components/Footer'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
-import { Button } from '../components/ui/buttons'
+import Button from '../ui/elements/Button'
 import {
   Container,
   GridRow,
   Section,
   SimpleBorderDecorator,
 } from '../ui/layout'
-import { H3 } from '../components/ui/text'
 import msMagazineLogo from '../images/MississippiMagazineLogo.png'
 import { buildImageObj } from '../lib/helpers'
 import { imageUrlFor } from '../lib/image-url'
-import { script } from '../ui/fonts'
+import { script, display, normal } from '../ui/fonts'
+import Divider from '../ui/elements/Divider'
+import { desktopOnly, mobileOnly } from '../utils/hide'
 
 const IndexPage = ({ data }) => {
   const {
@@ -25,18 +25,7 @@ const IndexPage = ({ data }) => {
     weddingsImage,
     welcomeText,
   } = data.sanityHomepage
-  // const slides =
-  //   props.data.prismicHomepage.data.home_slider.document[0].data.slides
-  // const familyPortrait =
-  //   props.data.prismicHomepage.data.family_portrait.localFile.childImageSharp
-  //     .fluid
-  // const portraitsBgImage =
-  //   props.data.prismicHomepage.data.portraits_link_background_image.localFile
-  //     .childImageSharp.fluid
-  // const weddingsBgImage =
-  //   props.data.prismicHomepage.data.weddings_link_background_image.localFile
-  //     .childImageSharp.fluid
-  // const welcomeMessage = props.data.prismicHomepage.data.welcome_message.html
+
   return (
     <Layout>
       <SliderSection>
@@ -56,7 +45,7 @@ const IndexPage = ({ data }) => {
           <div className="mobile-heading">
             <h3>Welcome</h3>
             <h4 className="greeting">Meet Sarah</h4>
-            <hr />
+            <Divider />
           </div>
           <div className="row">
             <div>
@@ -75,7 +64,7 @@ const IndexPage = ({ data }) => {
             </div>
             <div>
               <div className="desktop-heading">
-                <H3>Welcome</H3>
+                <h3>Welcome</h3>
                 <h4 className="greeting">Meet Sarah</h4>
                 <hr />
               </div>
@@ -129,12 +118,12 @@ const IndexPage = ({ data }) => {
       </section>
 
       {/* As Seen In Section */}
-      <Section>
-        <H3>As Seen In</H3>
+      <AsSeenInSection>
+        <h3>As Seen In</h3>
         <LogosRow>
           <img src={msMagazineLogo} alt="Mississippi Magazine" />
         </LogosRow>
-      </Section>
+      </AsSeenInSection>
     </Layout>
   )
 }
@@ -143,13 +132,14 @@ const SliderSection = styled.div`
   background-color: #fff;
   display: flex;
   justify-content: center;
-  height: 400px;
+  /* height: 400px; */
+  height: calc(100vh - 264px);
   position: relative;
   overflow: hidden;
 
   img {
-    /* max-width: none; */
-    /* height: 100%; */
+    max-width: none;
+    height: 100%;
     position: absolute;
     top: 0;
     left: 50%;
@@ -193,18 +183,28 @@ const WelcomeSection = styled(Section)`
     margin: 0 auto;
   }
 
+  .desktop-heading,
   .mobile-heading {
-    display: none;
-    font-family: ${script};
-    font-weight: normal;
-    color: #9fbebc;
-    font-size: 3rem;
-    text-align: center;
-    margin: 0.5em 0 0.2em;
+    h3 {
+      color: #9fbebc;
+      font-family: ${script};
+      font-weight: normal;
+      font-size: 3rem;
+      text-align: center;
+      margin: 0.5em 0 0.2em;
+    }
+  }
+
+  .mobile-heading {
+    ${mobileOnly}
+  }
+
+  .desktop-heading {
+    ${desktopOnly}
   }
 
   .greeting {
-    font-family: 'Playfair Display', Helvetica, Arial, sans-serif;
+    font-family: ${display};
     text-transform: uppercase;
     font-size: 2.4rem;
     letter-spacing: 0.08em;
@@ -215,14 +215,6 @@ const WelcomeSection = styled(Section)`
     .image-wrapper {
       max-width: 90%;
       margin-bottom: 2rem;
-    }
-
-    .mobile-heading {
-      display: block;
-    }
-
-    .desktop-heading {
-      display: none;
     }
 
     button {
@@ -236,7 +228,7 @@ const WelcomeMessage = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family: 'Lora', Helvetica, Arial, sans-serif;
+  font-family: ${normal};
 
   margin-bottom: 2rem;
   text-align: center;
@@ -278,7 +270,7 @@ const CategoryCardContent = styled.div`
 
 const CategoryCardTitle = styled.h3`
   color: inherit;
-  font-family: 'Playfair Display', Helvetica, Arial, sans-serif;
+  font-family: ${display};
   font-size: 3rem;
   font-weight: normal;
   letter-spacing: 0.1em;
@@ -292,7 +284,7 @@ const CategoryLink = styled(Link)`
   border: 2px solid #fff;
   height: 3rem;
   width: 200px;
-  font-family: 'Lora', Helvetica, Arial, sans-serif;
+  font-family: ${normal};
   text-decoration: none;
   color: inherit;
   font-size: 1.2rem;
@@ -313,6 +305,17 @@ const CategoryLink = styled(Link)`
       background-color: #000;
       color: #fff;
     }
+  }
+`
+
+const AsSeenInSection = styled(Section)`
+  h3 {
+    color: #9fbebc;
+    font-family: ${script};
+    font-weight: normal;
+    font-size: 3rem;
+    text-align: center;
+    margin: 0.5em 0 0.2em;
   }
 `
 

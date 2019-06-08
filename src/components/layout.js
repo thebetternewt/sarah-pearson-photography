@@ -9,6 +9,7 @@ import './layout.css'
 import MobileNav from './MobileNav'
 import Nav from './Nav'
 import Footer from './Footer'
+import { normal, script, display } from '../ui/fonts'
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -25,7 +26,7 @@ const HeaderWrapper = styled.div`
 const HeaderTitle = styled.h1`
   color: #000;
   margin: 2rem 0;
-  font-family: 'Playfair Display', Helvetica, Arial, sans-serif;
+  font-family: ${display};
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.07em;
@@ -34,7 +35,7 @@ const HeaderTitle = styled.h1`
   span {
     display: block;
     font-size: 0.8em;
-    font-family: 'Pinyon Script', Helvetica, Arial, sans-serif;
+    font-family: ${script};
     font-style: italic;
     text-align: center;
     text-transform: capitalize;
@@ -100,7 +101,7 @@ const MobileNavToggle = styled.button`
 `
 
 const ContentWrapper = styled.div`
-  font-family: 'Baskerville', Arial, Helvetica, sans-serif;
+  font-family: ${normal};
   color: #555;
 `
 

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 import { TEAL } from '../ui/colors'
-import { script } from '../ui/fonts'
+import { script, normal } from '../ui/fonts'
 
 export const FeaturedGalleriesCollection = styled.div`
   display: flex;
@@ -188,7 +188,7 @@ export const FeaturedGalleryCard = styled.div`
   }
 
   h4 {
-    font-family: 'Lora', Helvetica, Arial, sans-serif;
+    font-family: ${normal};
     font-weight: normal;
     color: #fff;
     font-size: 2.5rem;
@@ -199,7 +199,7 @@ export const FeaturedGalleryCard = styled.div`
   }
 
   h5 {
-    font-family: 'Pinyon Script', Helvetica, Arial, sans-serif;
+    font-family: ${script};
     font-weight: normal;
     color: #fff;
     font-size: 2rem;
@@ -213,7 +213,7 @@ export const FeaturedGalleryCard = styled.div`
   button {
     z-index: 1;
     margin-top: 15px;
-    font-family: 'Lora', Helvetica, Arial, sans-serif;
+    font-family: ${normal};
     border: 3px solid #fff;
     padding: 5px 12px;
     background: transparent;

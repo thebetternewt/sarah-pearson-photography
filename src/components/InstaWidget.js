@@ -2,6 +2,7 @@ import { graphql, StaticQuery } from 'gatsby'
 import Img from 'gatsby-image'
 import React from 'react'
 import styled from 'styled-components'
+import { script } from '../ui/fonts'
 
 const Instawidget = styled.div`
   display: flex;
@@ -10,7 +11,7 @@ const Instawidget = styled.div`
   padding: 1rem 0;
 
   p {
-    font-family: 'Pinyon Script', Helvetica, Arial, sans-serif;
+    font-family: ${script};
     font-size: 2.5rem;
     text-align: center;
     line-height: 1em;

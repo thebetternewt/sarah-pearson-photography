@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 import { GridRow } from '../ui/layout'
 import { GOLD } from '../ui/colors'
+import { normal } from '../ui/fonts'
 
 const Form = styled.form`
   input,
@@ -34,7 +35,7 @@ const Form = styled.form`
     background-color: ${GOLD};
     height: 3rem;
     width: 200px;
-    font-family: 'Lora', Helvetica, Arial, sans-serif;
+    font-family: ${normal};
     text-decoration: none;
     color: #fff;
     font-size: 1.2rem;

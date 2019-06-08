@@ -1,18 +1,19 @@
 import styled from 'styled-components'
+import { script } from '../ui/fonts'
 
 const PageHeader = styled.div`
   position: relative;
   display: flex;
   align-items: center;
   /* justify-content: center; */
-  height: 400px;
+  height: 480px;
   color: #fff;
   overflow: hidden;
   flex-direction: column;
   /* text-align: center; */
 
   h2 {
-    font-family: 'Pinyon Script', Helvetica, Arial, sans-serif;
+    font-family: ${script};
     font-size: 7rem;
     margin: 0;
     font-weight: normal;
@@ -21,7 +22,7 @@ const PageHeader = styled.div`
     text-align: center;
   }
   h3 {
-    font-family: 'Pinyon Script', Helvetica, Arial, sans-serif;
+    font-family: ${script};
     font-weight: normal;
     font-size: 3rem;
     color: inherit;

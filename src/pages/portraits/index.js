@@ -6,13 +6,13 @@ import styled from 'styled-components'
 import Layout from '../../components/layout'
 import Contact from '../../components/Contact'
 import SEO from '../../components/seo'
-import { H2, H3 } from '../../components/ui/text'
+import { H2, h3 } from '../../components/ui/text'
 import { Section, Container, SimpleBorderDecorator } from '../../ui/layout'
 import { BLUE, TEAL } from '../../ui/colors'
 import Faq from '../../components/Faq'
 import PageHeader from '../../components/PageHeader'
-import { script } from '../../ui/fonts'
-import Divider from '../../ui/Divider'
+import { script, normal } from '../../ui/fonts'
+import Divider from '../../ui/elements/Divider'
 
 const FeaturedGalleryCardRow = styled.div`
   padding: 0 1rem;
@@ -75,7 +75,7 @@ const FeaturedGalleryCard = styled.div`
   }
 
   h4 {
-    font-family: 'Lora', Helvetica, Arial, sans-serif;
+    font-family: ${normal};
     font-weight: normal;
     color: #fff;
     font-size: 2.5rem;
@@ -100,7 +100,7 @@ const FeaturedGalleryCard = styled.div`
   button {
     z-index: 1;
     margin-top: 15px;
-    font-family: 'Lora', Helvetica, Arial, sans-serif;
+    font-family: ${normal};
     border: 3px solid #fff;
     padding: 5px 12px;
     background: transparent;
@@ -116,35 +116,34 @@ const FeaturedGalleryCard = styled.div`
   }
 `
 
-const Portraits = props => {
-  console.log(props)
-  const headerImage = props.data.prismicWeddingsPage.data.featured_image
-  const featuredGalleriesCards = props.data.prismicWeddingsPage.data.featured_galleries
-    .slice(0, 3)
-    .map(({ gallery }) => {
-      const { data } = gallery.document[0]
-      return (
-        <Link to={`${data.category}/${gallery.uid}`} key={gallery.id}>
-          <FeaturedGalleryCardWrapper>
-            <FeaturedGalleryCard
-              bgImage={data.featured_image.localFile.childImageSharp.fluid.src}
-            >
-              <h4>{data.title.text}</h4>
-              <h5>{gallery.tags[0]}</h5>
-              {/* <button>View Gallery</button> */}
-            </FeaturedGalleryCard>
-          </FeaturedGalleryCardWrapper>
-        </Link>
-      )
-    })
+const Portraits = ({ data }) => {
+  // const headerImage = props.data.prismicWeddingsPage.data.featured_image
+  // const featuredGalleriesCards = props.data.prismicWeddingsPage.data.featured_galleries
+  //   .slice(0, 3)
+  //   .map(({ gallery }) => {
+  //     const { data } = gallery.document[0]
+  //     return (
+  //       <Link to={`${data.category}/${gallery.uid}`} key={gallery.id}>
+  //         <FeaturedGalleryCardWrapper>
+  //           <FeaturedGalleryCard
+  //             bgImage={data.featured_image.localFile.childImageSharp.fluid.src}
+  //           >
+  //             <h4>{data.title.text}</h4>
+  //             <h5>{gallery.tags[0]}</h5>
+  //             {/* <button>View Gallery</button> */}
+  //           </FeaturedGalleryCard>
+  //         </FeaturedGalleryCardWrapper>
+  //       </Link>
+  //     )
+  //   })
 
-  const { faq } = props.data.prismicWeddingsPage.data
+  // const { faq } = props.data.prismicWeddingsPage.data
 
   return (
     <Layout>
       <SEO title="Portraits" />
       <PageHeader>
-        <Img
+        {/* <Img
           fluid={headerImage.localFile.childImageSharp.fluid}
           alt={headerImage.alt}
           style={{
@@ -155,16 +154,23 @@ const Portraits = props => {
             minWidth: '100%',
             zIndex: -1,
           }}
-        />
-        <H2>Portraits</H2>
+        /> */}
+        <h2>Portraits</h2>
       </PageHeader>
 
       {/* Featured Galleries Section */}
       <Section>
         <Container>
-          <H3>Featured</H3>
+          <h3>Featured</h3>
           <FeaturedGalleryCardRow>
-            {featuredGalleriesCards}
+            <Link to="">
+              <FeaturedGalleryCardWrapper>
+                <FeaturedGalleryCard bgImage="https://images.pexels.com/photos/2379652/pexels-photo-2379652.jpeg?auto=format%2Ccompress&cs=tinysrgb&dpr=2&h=750&w=1260">
+                  <h4>Our Wedding</h4>
+                  <h5>Summer</h5>/{' '}
+                </FeaturedGalleryCard>
+              </FeaturedGalleryCardWrapper>
+            </Link>
           </FeaturedGalleryCardRow>
         </Container>
       </Section>
@@ -219,15 +225,15 @@ const Portraits = props => {
       {/* Investment Section */}
       <Section bgColor="#eee">
         <Container>
-          <H3>Investment</H3>
+          <h3>Investment</h3>
         </Container>
       </Section>
 
       {/* FAQ Section */}
       <Section bgColor={BLUE}>
         <Container>
-          <H3 style={{ color: '#fff' }}>F.A.Q.</H3>
-          <Faq faq={faq} />
+          <h3 style={{ color: '#fff' }}>F.A.Q.</h3>
+          {/* <Faq faq={faq} /> */}
         </Container>
       </Section>
       {/* Videography Section */}
@@ -246,60 +252,10 @@ const Portraits = props => {
 
 export default Portraits
 
-export const query = graphql`
-  query PortraitsPageQuery {
-    prismicWeddingsPage {
-      data {
-        title {
-          html
-        }
-        featured_image {
-          alt
-          localFile {
-            childImageSharp {
-              fluid(maxWidth: 1600) {
-                ...GatsbyImageSharpFluid
-              }
-            }
-          }
-        }
-        featured_galleries {
-          gallery {
-            id
-            uid
-            url
-            type
-            tags
-            document {
-              data {
-                category
-                title {
-                  text
-                }
-                featured_image {
-                  localFile {
-                    childImageSharp {
-                      fluid(maxWidth: 400) {
-                        ...GatsbyImageSharpFluid
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-        faq {
-          question
-          answer {
-            html
-            text
-          }
-        }
-      }
-    }
-  }
-`
+// export const query = graphql`
+//   query PortraitsPageQuery {
+//   }
+// `
 
 const SliderContent = styled.div`
   max-width: 90vw;
@@ -313,7 +269,7 @@ const SliderContent = styled.div`
 
   h5 {
     text-align: center;
-    font-family: 'Pinyon Script', Helvetica, Arial, sans-serif;
+    font-family: ${script};
     font-size: 2rem;
     font-weight: normal;
     margin: 0.3em 0;

@@ -7,13 +7,13 @@ import BlockContent from '@sanity/block-content-to-react'
 import Layout from '../components/layout'
 import PageHeader from '../components/PageHeader'
 import { Section, Container } from '../ui/layout'
-import { FaTags } from 'react-icons/fa'
+import { FaTags, FaChevronRight } from 'react-icons/fa'
 import { BLUE } from '../ui/colors'
-import { normal, script } from '../ui/fonts'
+import { normal, script, display } from '../ui/fonts'
 import { buildImageObj } from '../lib/helpers'
 import { imageUrlFor } from '../lib/image-url'
 
-const galleryPost = ({ data }) => {
+const GalleryPost = ({ data }) => {
   console.log('post data:', data)
   const post = data.sanityPost
   return (
@@ -49,19 +49,18 @@ const galleryPost = ({ data }) => {
           <Post>
             <div className="detail">
               <Breadcrumbs>
-                Blog<span>/</span>
-                {post.category.title}
+                Blog <FaChevronRight size={10} /> {post.category.title}
               </Breadcrumbs>
-              <Tags>
+              {/* <Tags>
                 <FaTags size="28" color="#aaa" />
-                {/* <ul>
+                <ul>
                   {post.tags.map(tag => (
                     <li key={tag}>
                       <span>{tag}</span>
                     </li>
                   ))}
-                </ul> */}
-              </Tags>
+                </ul>
+              </Tags> */}
             </div>
             <div className="heading">
               <h1>{post.title}</h1>
@@ -133,17 +132,18 @@ export const query = graphql`
   }
 `
 
-export default galleryPost
+export default GalleryPost
 
 const Post = styled.div`
   .heading {
     text-align: center;
 
     h1 {
-      font-family: ${normal};
+      font-family: ${display};
+      text-transform: uppercase;
       font-weight: normal;
       margin: 3rem 0 0.3em;
-      font-size: 4rem;
+      font-size: 3rem;
     }
     h2 {
       font-family: ${script};
@@ -168,11 +168,11 @@ const Post = styled.div`
 `
 
 const Breadcrumbs = styled.p`
-  font-family: 'Lora', 'Times New Roman', Times, serif;
+  font-family: ${display};
   /* color: ${BLUE}; */
   opacity: 0.6;
-  font-size: 1.1rem;
   margin: 0;
+  text-transform: uppercase;
 
   span {
     padding: 10px;

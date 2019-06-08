@@ -141,8 +141,7 @@ const Post = styled.div`
 `
 
 const Breadcrumbs = styled.p`
-  font-family: 'Lora', 'Times New Roman', Times, serif;
-  /* color: ${BLUE}; */
+  font-family: ${normal};
   opacity: 0.6;
   font-size: 1.1rem;
   margin: 0;

@@ -4,7 +4,7 @@ import React from 'react'
 import Layout from '../../components/layout'
 import PageHeader from '../../components/PageHeader'
 import SEO from '../../components/seo'
-import { Button } from '../../components/ui/buttons'
+import Button from '../../ui/elements/Button'
 import { Container, Section, SimpleBorderDecorator } from '../../ui/layout'
 import { buildImageObj } from '../../lib/helpers'
 import { imageUrlFor } from '../../lib/image-url'
@@ -21,29 +21,7 @@ import { TEAL } from '../../ui/colors'
 const Weddings = ({ data }) => {
   console.log(data.sanityWeddingsPage)
 
-  const { featuredGalleries } = data.sanityWeddingsPage
-
-  const headerImage = data.prismicWeddingsPage.data.featured_image
-  const featuredGalleriesCards = data.prismicWeddingsPage.data.featured_galleries
-    .slice(0, 3)
-    .map(({ gallery }) => {
-      const { data } = gallery.document[0]
-      return (
-        <Link to={`${data.category}/${gallery.uid}`} key={gallery.id}>
-          <FeaturedGalleryCardWrapper>
-            <FeaturedGalleryCard
-              bgImage={data.featured_image.localFile.childImageSharp.fluid.src}
-            >
-              <h4>{data.title.text}</h4>
-              <h5>{gallery.tags[0]}</h5>
-              {/* <button>View Gallery</button> */}
-            </FeaturedGalleryCard>
-          </FeaturedGalleryCardWrapper>
-        </Link>
-      )
-    })
-
-  const { mainImage } = data.sanityWeddingsPage
+  const { featuredGalleries, mainImage } = data.sanityWeddingsPage
 
   return (
     <Layout>
@@ -52,7 +30,7 @@ const Weddings = ({ data }) => {
         <img
           src={imageUrlFor(buildImageObj(mainImage))
             .width(1600)
-            .height(400)
+            .height(480)
             .fit('crop')
             .url()}
           alt={mainImage.alt}
@@ -207,57 +185,6 @@ export const query = graphql`
       childImageSharp {
         fluid {
           ...GatsbyImageSharpFluid
-        }
-      }
-    }
-
-    prismicWeddingsPage {
-      data {
-        title {
-          html
-        }
-        featured_image {
-          alt
-          localFile {
-            childImageSharp {
-              fluid(maxWidth: 1600) {
-                ...GatsbyImageSharpFluid
-              }
-            }
-          }
-        }
-        featured_galleries {
-          gallery {
-            id
-            uid
-            url
-            type
-            tags
-            document {
-              data {
-                category
-                title {
-                  text
-                }
-                featured_image {
-                  localFile {
-                    childImageSharp {
-                      fluid(maxWidth: 400) {
-                        ...GatsbyImageSharpFluid
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-        faq {
-          question
-          answer {
-            html
-            text
-          }
         }
       }
     }
