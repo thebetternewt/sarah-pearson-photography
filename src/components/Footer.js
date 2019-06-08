@@ -6,6 +6,8 @@ import watercolor from '../images/blue-watercolor.jpg'
 import InstaWidget from './InstaWidget'
 import { Container, SimpleBorderDecorator } from '../ui/layout'
 import { script } from '../ui/fonts'
+import Divider from '../ui/elements/Divider'
+import { desktopOnly } from '../utils/hide'
 
 const FooterWrapper = styled.footer`
   /* background-image: url(${watercolor}); */
@@ -24,6 +26,7 @@ const FooterWrapper = styled.footer`
   }
 
   .header {
+    position: relative;
     font-family: ${script};
     font-weight: 300;
     font-size: 2.3rem;
@@ -31,13 +34,6 @@ const FooterWrapper = styled.footer`
     line-height: 1em;
     margin: 0;
     padding-bottom: 0.5rem;
-  }
-
-  .divider {
-    background-color: #ccc;
-    height: 1px;
-    width: 200px;
-    margin: 1rem auto;
   }
 
   .social-links {
@@ -88,6 +84,7 @@ const FooterWrapper = styled.footer`
 
     .row {
       flex-direction: column;
+      border: none;
     }
 
     .col {
@@ -121,27 +118,18 @@ const FooterNav = styled.nav`
     text-align: left;
   }
 
-  @media screen and (max-width: 800px) {
-    display: none;
-    /* margin-left: 0;
-    align-self: center;
-    align-items: center;
-
-    a {
-      text-align: center;
-    } */
-  }
+  ${desktopOnly}
 `
 
 export default () => (
   <FooterWrapper>
     <Container maxWidth={960}>
       <InstaWidgetWrapper>
-        <h4 className="header">Follow along on Instagram</h4>
-        <div className="divider" />
-        <InstaWidget />
         <SimpleBorderDecorator xGap={25} yGap={30} />
         <SimpleBorderDecorator xGap={30} yGap={25} />
+        <h4 className="header">Follow along on Instagram</h4>
+        <Divider />
+        <InstaWidget />
       </InstaWidgetWrapper>
       <div className="row">
         <div className="col col-1">

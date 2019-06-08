@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { script } from '../ui/fonts'
 
 const Instawidget = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;

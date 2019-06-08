@@ -6,19 +6,16 @@ import Layout from '../components/layout'
 import PageHeader from '../components/PageHeader'
 import { Section, Container } from '../ui/layout'
 
-// import pearsonFamily from '../images/pearson-family.jpg'
-import { auto } from 'eol'
-import { italic } from 'ansi-colors'
-import { script, display } from '../ui/fonts'
-
 const Sarah = () => (
   <Layout>
-    <PageHeader>
-      <img
-        src="https://images.pexels.com/photos/1449657/pexels-photo-1449657.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-        style={{ width: '100%', transform: 'translate3d(0, -35%, 0)' }}
-      />
-    </PageHeader>
+    <PageHeader
+      style={{
+        backgroundImage:
+          'url("https://images.pexels.com/photos/1449657/pexels-photo-1449657.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)"',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    ></PageHeader>
     <Section>
       <Container>
         <p>It's so nice to meet you!</p>

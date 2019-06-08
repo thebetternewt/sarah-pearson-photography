@@ -83,7 +83,7 @@ export default ({ close }) => (
           </Link>
         </li>
         <li>
-          <Link to="/about">Sarah</Link>
+          <Link to="/sarah">Sarah</Link>
         </li>
         <li>
           <Link to="/weddings">Weddings</Link>

@@ -58,8 +58,8 @@ const IndexPage = ({ data }) => {
                     .url()}
                   alt={welcomeImage.alt}
                 />
-                <SimpleBorderDecorator yGap={18} xGap={10} />
-                <SimpleBorderDecorator yGap={10} xGap={18} />
+                <SimpleBorderDecorator yGap={15} xGap={10} />
+                <SimpleBorderDecorator yGap={10} xGap={15} />
               </div>
             </div>
             <div>
