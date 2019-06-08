@@ -1,8 +1,7 @@
-import { Link } from 'gatsby';
-import React from 'react';
-import styled from 'styled-components';
-import logo from '../images/spp_logo.png';
-
+import { Link } from 'gatsby'
+import React from 'react'
+import styled from 'styled-components'
+import logo from '../images/spp_logo.png'
 
 const Nav = styled.nav`
   width: 100%;
@@ -50,7 +49,7 @@ export default () => (
   <Nav>
     <ul>
       <li>
-        <Link to="/about">Sarah</Link>
+        <Link to="/sarah">Sarah</Link>
       </li>
       <li>
         <Link to="/weddings">Weddings</Link>
