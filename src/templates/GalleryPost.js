@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import styled from 'styled-components'
@@ -12,10 +12,16 @@ import { BLUE } from '../ui/colors'
 import { normal, script, display } from '../ui/fonts'
 import { buildImageObj } from '../lib/helpers'
 import { imageUrlFor } from '../lib/image-url'
+import ShadowBox from '../components/ShadowBox'
 
 const GalleryPost = ({ data }) => {
+  const [selectedImage, setSelectedImage] = useState()
+
+  console.log('selectedImage:', selectedImage)
+
   console.log('post data:', data)
   const post = data.sanityPost
+
   return (
     <Layout>
       <PageHeader>
@@ -72,9 +78,25 @@ const GalleryPost = ({ data }) => {
             </div>
             <Gallery>
               {post.gallery.images.map(({ asset }) => (
-                <Img key={asset._id} alt={asset.caption} fluid={asset.fluid} />
+                <div
+                  key={asset._id}
+                  className="image-container"
+                  onClick={() => setSelectedImage(asset)}
+                >
+                  <Img
+                    alt={asset.caption}
+                    fluid={asset.fluid}
+                    style={{ height: '100%' }}
+                  />
+                </div>
               ))}
             </Gallery>
+            {selectedImage && (
+              <ShadowBox
+                image={selectedImage}
+                close={() => setSelectedImage(null)}
+              />
+            )}
           </Post>
         </Container>
       </Section>
@@ -213,6 +235,10 @@ const Gallery = styled.div`
   grid-gap: 10px;
   grid-auto-rows: minmax(250px, 1fr);
   grid-template-columns: 1fr;
+
+  .image-container {
+    cursor: pointer;
+  }
 
   @media screen and (min-width: 800px) {
     grid-template-columns: repeat(2, 1fr);

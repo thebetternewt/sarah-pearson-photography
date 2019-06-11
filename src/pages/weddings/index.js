@@ -21,7 +21,7 @@ import { TEAL } from '../../ui/colors'
 const Weddings = ({ data }) => {
   console.log(data.sanityWeddingsPage)
 
-  const { featuredGalleries, mainImage } = data.sanityWeddingsPage
+  const { featuredPosts: posts, mainImage } = data.sanityWeddingsPage
 
   return (
     <Layout>
@@ -78,21 +78,19 @@ const Weddings = ({ data }) => {
           </h3>
           <FeaturedGalleriesCollection>
             <div className="col">
-              <Link to="/weddings">
+              <Link to={`/weddings/${posts[0].slug.current}`}>
                 <div className="gallery-card">
                   <div className="overlay">
                     <div className="number">01.</div>
                     <div className="separator" />
-                    <div className="title">{featuredGalleries[0].title}</div>
+                    <div className="title">{posts[0].title}</div>
                   </div>
                   <img
-                    src={imageUrlFor(
-                      buildImageObj(featuredGalleries[0].featuredImage)
-                    )
+                    src={imageUrlFor(buildImageObj(posts[0].mainImage))
                       .height(900)
                       .fit('crop')
                       .url()}
-                    alt={featuredGalleries[0].alt}
+                    alt={posts[0].alt}
                   />
                 </div>
               </Link>
@@ -103,7 +101,7 @@ const Weddings = ({ data }) => {
                   <div className="overlay">
                     <div className="number">02.</div>
                     <div className="separator" />
-                    <div className="title">{featuredGalleries[0].title}</div>
+                    <div className="title">{posts[0].title}</div>
                   </div>
                   <img
                     src={imageUrlFor(buildImageObj(mainImage))
@@ -119,7 +117,7 @@ const Weddings = ({ data }) => {
                   <div className="overlay">
                     <div className="number">03.</div>
                     <div className="separator" />
-                    <div className="title">{featuredGalleries[0].title}</div>
+                    <div className="title">{posts[0].title}</div>
                   </div>
                   <img
                     src={imageUrlFor(buildImageObj(mainImage))
@@ -137,7 +135,7 @@ const Weddings = ({ data }) => {
                   <div className="overlay">
                     <div className="number">04.</div>
                     <div className="separator" />
-                    <div className="title">{featuredGalleries[0].title}</div>
+                    <div className="title">{posts[0].title}</div>
                   </div>
                   <img
                     src={imageUrlFor(buildImageObj(mainImage))
@@ -214,9 +212,13 @@ export const query = graphql`
         }
         alt
       }
-      featuredGalleries {
+      featuredPosts {
+        id
         title
-        featuredImage {
+        slug {
+          current
+        }
+        mainImage {
           crop {
             _key
             _type
@@ -235,6 +237,10 @@ export const query = graphql`
           }
           asset {
             _id
+
+            fluid {
+              ...GatsbySanityImageFluid
+            }
           }
           alt
         }
