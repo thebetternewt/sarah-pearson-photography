@@ -71,7 +71,7 @@ const HomeSection = styled.section`
     margin: 0;
     min-width: 120%;
     min-height: 100%;
-    /* object-fit: cover; */
+    object-fit: cover;
     z-index: -1;
   }
 
