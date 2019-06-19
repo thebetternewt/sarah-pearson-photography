@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import Menu from '../components/Menu'
 import { display, script } from '../ui/fonts'
 
 import brideWindow from '../images/bride-window.jpg'
@@ -10,6 +11,7 @@ import baby from '../images/baby.jpg'
 const Home = () => {
   return (
     <div>
+      <Menu />
       <HomeSection className="story">
         <Heading>
           Sarah Pearson <span>Photography</span>
@@ -28,9 +30,6 @@ const Home = () => {
         </div>
       </HomeSection>
       <HomeSection className="weddings">
-        <Heading>
-          Sarah Pearson <span>Photography</span>
-        </Heading>
         <div className="cta weddings-cta">
           <h2 className="headline">Weddings &amp; Engagements</h2>
           <h3 className="subline">the telling of how two became one...</h3>
@@ -43,9 +42,6 @@ const Home = () => {
         </div>
       </HomeSection>
       <HomeSection className="portraits">
-        <Heading>
-          Sarah Pearson <span>Photography</span>
-        </Heading>
         <div className="cta portraits-cta">
           <h2 className="headline">Portraits</h2>
           <h3 className="subline">family. graduation. cherish the moment...</h3>
@@ -72,33 +68,53 @@ const HomeSection = styled.section`
     position: absolute;
     bottom: 0;
     left: 0;
+    margin: 0;
     min-width: 120%;
     min-height: 100%;
-    object-fit: cover;
+    /* object-fit: cover; */
     z-index: -1;
   }
 
   .cta {
     &.story-cta {
-      margin-top: 40vh;
-      margin-left: 180px;
+      margin-top: 60vh;
+      margin-left: 10vw;
+
+      .headline {
+        margin-bottom: 1em;
+        font-size: 2.5rem;
+
+        span {
+          font-size: 2em;
+          padding-left: 60px;
+        }
+      }
+
+      @media (min-width: 500px) {
+        margin-top: 40vh;
+
+        .headline {
+          font-size: 4rem;
+        }
+      }
     }
 
     &.weddings-cta {
-      margin-top: 250px;
-      margin-left: 180px;
+      margin-top: 30vh;
+      margin-left: 10vw;
 
       .headline {
-        font-size: 4rem;
+        font-size: 2.4rem;
         font-family: ${display};
         text-transform: uppercase;
       }
 
       .subline {
         font-family: ${script};
-        font-size: 2rem;
+        font-size: 1.3rem;
         font-weight: normal;
         padding-left: 5px;
+        margin-bottom: 3rem;
       }
 
       button {
@@ -109,53 +125,63 @@ const HomeSection = styled.section`
           color: #333;
         }
       }
+
+      @media (min-width: 500px) {
+        margin-left: 20vw;
+
+        .headline {
+          font-size: 4rem;
+        }
+
+        .subline {
+          font-size: 2rem;
+        }
+      }
     }
 
     &.portraits-cta {
-      margin-top: 50vh;
-      margin-left: 100px;
+      margin-top: 20vh;
+      margin-left: 10vw;
 
       .headline {
-        font-size: 4rem;
+        font-size: 2.4rem;
         font-family: ${display};
         text-transform: uppercase;
       }
 
       .subline {
         font-family: ${script};
-        font-size: 2rem;
+        font-size: 1.3rem;
         font-weight: normal;
-        padding-left: 10px;
+        padding-left: 5px;
+        margin-bottom: 2rem;
       }
 
-      /* button {
-        border-color: #fff;
+      @media (min-width: 500px) {
+        margin-left: 20vw;
+        margin-top: 60vh;
 
-        &:hover {
-          background: #fff;
-          color: #333;
+        .headline {
+          font-size: 4rem;
         }
-      } */
+
+        .subline {
+          font-size: 2rem;
+        }
+      }
     }
 
     .headline {
       font-family: ${script};
       font-weight: normal;
-      font-size: 3rem;
-
-      span {
-        font-size: 2em;
-        padding-left: 60px;
-      }
     }
 
     button {
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       border: 2px solid #555;
       background-color: transparent;
-      width: 300px;
-      height: 80px;
-      margin-top: 2rem;
+      width: 200px;
+      height: 60px;
       color: inherit;
       cursor: pointer;
       transition: 300ms all ease;
@@ -165,16 +191,27 @@ const HomeSection = styled.section`
         color: #fff;
       }
     }
+
+    @media (min-width: 500px) {
+      button {
+        font-size: 1.5rem;
+        width: 300px;
+        height: 80px;
+      }
+    }
   }
 `
 
 const Heading = styled.h1`
-  margin: 3rem 2rem 0;
+  /* margin: 3rem 2rem 0; */
   font-family: ${display};
   text-transform: uppercase;
   font-weight: normal;
-  font-size: 2.3rem;
+  font-size: 1.7rem;
   letter-spacing: 0.7px;
+  position: absolute;
+  top: 30px;
+  left: 30px;
 
   span {
     font-family: ${script};
@@ -183,5 +220,9 @@ const Heading = styled.h1`
     display: block;
     margin-top: 0.5em;
     letter-spacing: 0;
+  }
+
+  @media (min-width: 500px) {
+    font-size: 2.3rem;
   }
 `
