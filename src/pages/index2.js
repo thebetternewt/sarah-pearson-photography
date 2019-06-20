@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import Menu from '../components/Menu'
+import Footer from '../components/Footer'
 import { display, script } from '../ui/fonts'
 
 import brideWindow from '../images/bride-window.jpg'
@@ -49,6 +50,7 @@ const Home = () => {
           <img className="bg-image" src={baby} alt="Baby with blue eyes" />
         </div>
       </HomeSection>
+      <Footer />
     </div>
   )
 }
@@ -57,8 +59,10 @@ export default Home
 
 const HomeSection = styled.section`
   height: 100vh;
+  min-height: 700px;
   overflow: hidden;
   position: relative;
+  color: #555;
 
   &.weddings {
     color: #fff;
@@ -77,7 +81,7 @@ const HomeSection = styled.section`
 
   .cta {
     &.story-cta {
-      margin-top: 60vh;
+      margin-top: 40vh;
       margin-left: 10vw;
 
       .headline {

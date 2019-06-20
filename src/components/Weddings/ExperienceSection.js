@@ -61,7 +61,7 @@ const ExperienceContent = styled(Container)`
   .content {
     max-width: 90vw;
     width: 400px;
-    height: 200px;
+    height: 300px;
     padding: 15px;
     display: flex;
     flex-direction: column;
